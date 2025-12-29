@@ -24,10 +24,14 @@ If this project uses Arcium, Arcium is documented at https://docs.arcium.com/dev
 
 - Ensure good variable naming, comments that exist are accurate, and look out for repeated code that should be turned into functions. Rather than add comments to explain what things are, give them useful names.
 
+Don't do this:
+
 ```typescript
 // Foo
 const shlerg = getFoo();
 ```
+
+Do this instead:
 
 ```typescript
 const foo = getFoo();
