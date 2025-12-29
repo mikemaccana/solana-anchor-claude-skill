@@ -1,7 +1,5 @@
 # Rules for this project
 
-- The project uses Arcium. Arcium is documented at https://docs.arcium.com/developers
-
 ## Success Criteria
 
 - Before you say 'SUCCESS', or celebrate, run `npm test`. If the tests fail you have more work to do. Don't stop until `npm test` passes on the code you have made.
