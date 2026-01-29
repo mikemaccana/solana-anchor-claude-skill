@@ -68,6 +68,7 @@ const foo = getFoo();
 - Functions should be verby, like `calculateFoo` or `getBar`
 - Avoid abbreviations, use full words (e.g., `context` rather than `ctx`)
 - Never use `e` for something thrown
+- Name a transaction some variant of `transaction`. Name instructions some variant of `instruction`. Name signatures some variant of `signature`. Do not confuse them - eg if the type looks like an instruction, you should not call it a 'transaction' because that is deceptive.
 
 You can still add comments for additional context, just be careful to avoid comments that are explaining things that would be better conveyed by good variable naming.
 
