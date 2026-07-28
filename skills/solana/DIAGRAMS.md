@@ -13,6 +13,7 @@
 ## The curve on top, columns beneath
 
 - **The cluster curve arcs across the top of the canvas** (e.g. `M 40,40 Q 320,130 600,40` on a width-640 canvas), and every on-curve address dot — each person, each mint, the program — sits ON it. Everything else hangs below the curve. **No line, arrow, or box ever crosses the curve**; the corner pockets above its ends may hold a mint's small box, nothing else.
+- **The curve is the heaviest line in the figure**: `stroke="#111" stroke-width="3.5"`. Token-movement arrows stay at `1.8`, box borders at `1.5` or below — nothing else may approach the curve's weight, so the cluster reads as the backbone at a glance.
 - **A person's accounts stack vertically beneath their dot**, in reading order: wallet box first, then their token account(s), then their per-program user/receipt account, then their bets/orders/positions. People read top to bottom; a reader finds Maria, then everything of Maria's, without scanning sideways.
 - **Program-wide accounts stack beneath the program's dot** (rightmost column): the program box first, then config, then the market/event/pool PDA, then outcome/reserve PDAs, then program-owned vaults. Dashed authority links stay short and inside the column.
 - **Step figures reuse the chapter account map's column layout.** Box top positions stay fixed across every figure in a chapter, so the reader keeps one mental map. Cross-column arrows route through the open space beneath the shorter columns.
@@ -26,7 +27,7 @@
 ## One accent color, on the active story only
 
 - **The palette is ink on paper plus one accent green**: ink `#111`, paper `#fff`, panel `#f4f4f2`, greys `#444`/`#555`/`#888` for secondary text and dashed lines, and accent `#1e7a3c` reserved for the step's action: the invoked handler line in the program box, token-movement arrows with their coins and amount labels, and NEW badges.
-- **The accent must never carry meaning alone.** Accented elements are also the boldest and heaviest marks, so the figure reads identically in greyscale print. Never introduce a second hue, and never use the accent for anything the step isn't doing.
+- **The accent must never carry meaning alone.** Accented elements are also the boldest marks below the curve (which stays the single heaviest line), so the figure reads identically in greyscale print. Never introduce a second hue, and never use the accent for anything the step isn't doing.
 
 ## Icons name the account kind
 
@@ -41,16 +42,18 @@ Each account box carries a small monochrome glyph beside its title, so the kind 
   </g>
   ```
 
-- **Token account / vault** — piggy bank:
+- **Token account / vault** — piggy bank. The curly tail trails behind the body on the left; the snout is opaque (`fill="#fff"`, drawn after the body so the body's outline never shows through it) and carries two nostrils. Keep this element order — it is what makes the snout cover the body edge:
 
   ```svg
   <g transform="translate(X,Y)">
-    <ellipse cx="7" cy="7" rx="6" ry="4.4" fill="none" stroke="#111" stroke-width="1.2"/>
-    <circle cx="12.6" cy="6.4" r="1.7" fill="none" stroke="#111" stroke-width="1"/>
-    <path d="M 3.6,3.4 L 5,1.2 L 6.8,2.9" fill="none" stroke="#111" stroke-width="1"/>
-    <line x1="4" y1="11.2" x2="4" y2="13" stroke="#111" stroke-width="1.2"/>
-    <line x1="10" y1="11.2" x2="10" y2="13" stroke="#111" stroke-width="1.2"/>
-    <line x1="6" y1="4.6" x2="8.4" y2="4.6" stroke="#111" stroke-width="1"/>
+    <path d="M 2.6,7.8 Q 0.6,7.4 0.9,5.6 Q 1.1,4.4 2.3,4.9" fill="none" stroke="#111" stroke-width="1"/>
+    <ellipse cx="8" cy="7" rx="5.4" ry="4.4" fill="none" stroke="#111" stroke-width="1.2"/>
+    <ellipse cx="12.9" cy="6.4" rx="1.8" ry="1.5" fill="#fff" stroke="#111" stroke-width="1"/>
+    <circle cx="12.35" cy="6.4" r="0.35" fill="#111"/>
+    <circle cx="13.45" cy="6.4" r="0.35" fill="#111"/>
+    <line x1="5.2" y1="11.4" x2="5.2" y2="13" stroke="#111" stroke-width="1.2"/>
+    <line x1="10.6" y1="11.4" x2="10.6" y2="13" stroke="#111" stroke-width="1.2"/>
+    <line x1="6.8" y1="4.4" x2="9.2" y2="4.4" stroke="#111" stroke-width="1"/>
   </g>
   ```
 
