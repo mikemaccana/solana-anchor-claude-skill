@@ -132,6 +132,8 @@ Keep the README focused and practical. Avoid generic boilerplate - write documen
 
 - **No numbered headings.** Headings are words only — no `## 1. Overview` or `### 3.6 Liquidation`. Numbered headings break when a section is inserted or removed.
 - **No preview paragraphs.** Don't open a README or section with "the sections below cover X, Y, and Z" — the headings already do that.
+- **A heading states what the reader gets, and works read alone.** It is close to a summary of its section, because a table of contents lists every heading out of context. Name the outcome, not the mechanism behind it: "Seeds Make Data Findable", not "Seeds Make Addresses Derivable". Keep specific actors out: "A User's Public Key Is Their Address", not "Alice's Public Key Is Her Address". A narrative walkthrough is the exception, where the headings are the story's steps and name who acts.
+- **A summary section states what the reader now knows**, not what the example's characters did — "a user's account holds their balance of SOL", not "Alice's holds her balance" — even when the section that taught it was a story.
 - **Integrate per-instruction reference into lifecycle prose.** Walk through the program's flow and inline each handler's mechanics (signers, accounts, token movements, errors) at the point it's first called. Don't keep a separate flat "Instruction Reference" section.
 - **Bold canonical terms on first use**, plain everywhere after — like a textbook.
 - **No ASCII art, no Mermaid diagrams, no markdown tables.** Use headings, nested bullet lists, or prose. Tables don't render well on chat surfaces. When a project calls for real figures (a book, a docs site), draw hand-authored SVG account diagrams per [DIAGRAMS.md](DIAGRAMS.md) instead.
