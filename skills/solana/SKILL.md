@@ -134,7 +134,7 @@ Keep the README focused and practical. Avoid generic boilerplate - write documen
 - **No preview paragraphs.** Don't open a README or section with "the sections below cover X, Y, and Z" — the headings already do that.
 - **Integrate per-instruction reference into lifecycle prose.** Walk through the program's flow and inline each handler's mechanics (signers, accounts, token movements, errors) at the point it's first called. Don't keep a separate flat "Instruction Reference" section.
 - **Bold canonical terms on first use**, plain everywhere after — like a textbook.
-- **No ASCII art, no Mermaid diagrams, no markdown tables.** Use headings, nested bullet lists, or prose. Tables don't render well on chat surfaces.
+- **No ASCII art, no Mermaid diagrams, no markdown tables.** Use headings, nested bullet lists, or prose. Tables don't render well on chat surfaces. When a project calls for real figures (a book, a docs site), draw hand-authored SVG account diagrams per [DIAGRAMS.md](DIAGRAMS.md) instead.
 - **No em-dashes.** Use a regular dash or rewrite the sentence. Em-dashes are an LLM-output tell. This applies to READMEs, code comments, commit messages, and doc strings.
 - **Don't say "worked example" or "worked scenario".** Just "Example", "Scenario", or "Walkthrough".
 - **Write "ID" in capitals, never "id", in prose.** It is an abbreviation: "a program ID", "the offer ID", "distinct market IDs". A **program ID** is a program's address. Only code identifiers (`program_id`) and the `id.json` filename keep the lowercase form.
@@ -271,6 +271,8 @@ The rules above apply to every file in the project. In addition, read the file t
 If a task touches more than one, read each.
 
 For setting up a Solana toolchain in CI or a fresh remote container (Agave, platform-tools behind TLS-intercepting proxies, the Quasar CLI, building Anchor projects without the anchor CLI): see [ENVIRONMENT.md](ENVIRONMENT.md).
+
+When you draw diagrams of Solana accounts (SVG figures for books, docs sites, or presentations): see [DIAGRAMS.md](DIAGRAMS.md).
 
 ## Git commits
 
