@@ -106,20 +106,22 @@ Draw the glyphs exactly as specified — one vocabulary book-wide, no per-figure
 
 ## Token movement arrows carry coins
 
-- **When tokens move, the arrow says so twice: a bold amount label, and coins at its midpoint.** Solid accent arrow (`stroke="#1e7a3c"`, matching arrowhead marker), the amount as a bold accent label ("1 TSLAx", "447 USDC"), and a small coin glyph at the arrow's midpoint:
+- **When tokens move, say the amount once and mark it with coins.** Solid accent arrow (`stroke="#1e7a3c"`, matching arrowhead marker), the amount as a bold accent label ("1 TSLAx", "447 USDC"), and the coin mark immediately beside that label — about 5px clear of it, vertically centred, on the label's left unless something already occupies that space:
 
   ```svg
-  <g transform="translate(MIDX,MIDY)">
-    <circle cx="4" cy="2" r="6" fill="#fff" stroke="#1e7a3c" stroke-width="1.3"/>
-    <circle cx="-3" cy="0" r="6" fill="#fff" stroke="#1e7a3c" stroke-width="1.3"/>
-    <text x="-3" y="3" font-size="8" font-weight="bold" fill="#1e7a3c" text-anchor="middle">$</text>
+  <g class="coin" transform="translate(X,Y)" fill="#fff">
+    <g stroke="#fff" stroke-width="4.5"><circle cx="5" cy="1.5" r="4.5"/><circle cx="0" cy="0" r="4.5"/><circle cx="-5" cy="1.5" r="4.5"/></g>
+    <g stroke="#1e7a3c" stroke-width="1.3"><circle cx="5" cy="1.5" r="4.5"/><circle cx="0" cy="0" r="4.5"/><circle cx="-5" cy="1.5" r="4.5"/></g>
   </g>
   ```
+
+- **Three rings, and no currency symbol inside them.** Two rings read as a pair of address dots at print size, where the accent colour is gone and a 2mm mark is all the reader has; three is unmistakable. The `$` that used to sit in the front ring asserted dollars on arrows carrying ACME, NVDAx, SPCXx, LP tokens and SOL — the ticker in the adjacent label is what names the asset, and the mark only has to say *tokens move here*. The doubled group is a white halo, the same trick the labels use, so the mark occludes any arrow it sits on.
+- **One coin mark per amount, and none without an amount.** The coin belongs to the *statement of the quantity*, not to the arrow, so a figure has exactly as many coin marks as it has amount labels. Where a numbered legend carries the amounts, the coins sit in the legend beside them; where one legend line covers both legs of a handler call ("5 NVDAx in, 5 NVDAx shares out"), that is one amount and gets one coin. An arrow that moves value and states no amount is the bug — add the amount rather than leave a coin floating on a bare arrow.
 
 - **Tokens move directly between accounts — nothing sits in between.** An arrow runs from one account box to another, unbroken. Never terminate it on a panel (a fee gate, a check, a calculation) and resume from the far side: on chain there is no intermediate holder, and drawing one invents a place for value to rest. Fees, gates and math belong in an italic annotation *beside* the arrow, or as the resulting field value inside the account that records it.
 - **The arrow's label is the amount actually transferred.** If the handler moves 100 and prices the trade off 99.70, the arrow says 100 and the 99.70 lives in an annotation. Labelling the arrow with a derived intermediate quantity misstates what the instruction does.
 - **A callout never restates account state.** If a step changes `admin_fees_owed_b`, show it as that field's new value inside its PDA box — bold, per the rule above — not as a separate box saying `admin_fees_owed_b += $0.05`. The account is the single source of truth for its own state; a floating callout duplicates it and will drift.
-- **Coins mean token value moved.** Lamport and rent flows, "owns", and "is authority for" relationships stay dashed grey (`stroke="#777" stroke-dasharray="5 3"`) with no coins and no accent. A reader scanning for value transfer follows the green.
+- **Coins mean token value moved, in this step.** Lamport and rent flows, "owns", and "is authority for" relationships stay dashed grey (`stroke="#777" stroke-dasharray="5 3"`) with no coins and no accent. A coin never appears on a faded element or on a movement the figure is not illustrating: the mark is accent green, and accent green means the step's action. A reader scanning for value transfer follows the green.
 
 ## Addresses are white-centered dots
 
