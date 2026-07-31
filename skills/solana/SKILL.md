@@ -96,6 +96,10 @@ Use these official documentation sources:
 
 - Some tools in Solana unfortunately use the same word 'instructions' for both the input and the functions. To avoid confusion, use 'instruction handlers' for the functions that handle instructions, and 'instructions' for the input to those functions.
 
+- Name handlers by one rule: **if the domain has a word for it, use the domain's word; if the handler only stamps out a container, it is `initialize_`.** Domain verbs are what make a program read like finance, and they come in pairs: `make_offer()`/`take_offer()`, `open_position()`/`close_position()`, `place_order()`/`cancel_order()`, plus `borrow`, `repay`, `liquidate`, `contribute`, `refund`. Setup has no domain meaning, so it is always `initialize_x()`, naming what it initializes: `initialize_market()`, `initialize_pool()`, `initialize_config()`, never `create_pool()`, `init_reserve()`, or a bare `initialize()`. The test is whether the handler moves money or takes a market action, or only writes parameters into a new account. A third family, `add_x()`, extends a container that already exists: `add_liquidity()`, `add_outcome()`, `add_asset()`.
+
+- Say **PDA** for an address and **account** for the data at it. They are not synonyms: a program derives the offer PDA and then writes the offer account. Use PDA where the subject is derivation, seeds, authority, ownership, or signing, and account where the subject is fields, balances, rent, creation, or closure.
+
 ## Do not use
 
 - Do not use 'Solana Labs' documentation. The company has been replaced by Anza.
