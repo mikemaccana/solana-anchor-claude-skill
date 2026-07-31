@@ -131,10 +131,11 @@ Draw the glyphs exactly as specified — one vocabulary book-wide, no per-figure
 - **A dot on the curve carries no label.** Its position on the curve already says the address is a public key with a private key behind it. Do not write `PUBLIC KEY` beside it — teach the convention once, in prose, where the reader first meets a person and their token account.
 - **An off-curve dot carries its seed list, and nothing else.** Write the seeds themselves — `"offer" + MAKER'S ADDRESS + ID`, or for an ATA `ATA PROGRAM + OWNER'S ADDRESS + MINT`. No `SEEDS:` prefix: a list of seeds is self-evidently a list of seeds, and the absence of a curve dot is what marks it as derived.
 - **Seeds are never drawn inside the account's rectangle.** Seeds are inputs to the address, not fields of the struct. They live beside the address dot, above or beside the account box.
+- **Every dot has an account rectangle.** A dot drawn on its own says the address exists but holds no account, which is never what a figure means. Draw the account too, rounded, with its icon and title, so a figure never implies that public keys have accounts and PDAs do not. The one exception is a legend key, where a lone dot beside its explanatory line is the whole point.
 
 ## Do not use
 
 - A second hue, or the accent on anything except the step's action.
 - `opacity` values other than the fade value `0.3`.
 - Mermaid, Graphviz, or generated diagrams for account figures — the layout decisions (stable columns, fade grouping) are the content, and generators cannot make them.
-- Filled address dots, seeds inside account rects, coins on non-token arrows, or bare handler names without `()`.
+- Filled address dots, bare dots with no account rectangle, seeds inside account rects, coins on non-token arrows, or bare handler names without `()`.
