@@ -1,6 +1,6 @@
 # Anchor Guidelines (Anchor Programs)
 
-Anchor-specific rules. Read these alongside the general rules in [SKILL.md](SKILL.md) and the shared Rust + onchain-math rules in [RUST.md](RUST.md) (checked arithmetic, financial math, PDA bumps, project structure, no magic numbers — those apply to Anchor too).
+Anchor-specific rules. Read these alongside the general rules in [SKILL.md](SKILL.md) and the shared Rust + onchain-math rules in [RUST.md](RUST.md) (checked arithmetic, financial math, PDA bumps, project structure, no magic numbers - those apply to Anchor too).
 
 ## Anchor Version
 
@@ -84,7 +84,7 @@ pub struct InitializeProfile<'info> {
 
 ## Testing (Rust + LiteSVM)
 
-Anchor 1.0+ ships Rust + LiteSVM tests by default — `anchor init` now scaffolds a Rust integration test under `programs/<name>/tests/`, and `Anchor.toml` sets `test = "cargo test"`. Use this as the sole test pattern for Anchor programs. Do not write TypeScript tests for Anchor programs.
+Anchor 1.0+ ships Rust + LiteSVM tests by default - `anchor init` now scaffolds a Rust integration test under `programs/<name>/tests/`, and `Anchor.toml` sets `test = "cargo test"`. Use this as the sole test pattern for Anchor programs. Do not write TypeScript tests for Anchor programs.
 
 ### How to initialise a new project
 
@@ -94,8 +94,8 @@ Always initialise new Anchor projects with both flags pinned explicitly:
 anchor init <name> --package-manager npm --test-template litesvm
 ```
 
-- `--package-manager npm` — `anchor init`'s default is `yarn`, which this skill bans. Pin npm at init time so you don't have to fix `Anchor.toml` afterwards.
-- `--test-template litesvm` — currently the default in `anchor-cli`, but pin it explicitly so the project doesn't break if the default changes. The other templates (`mocha`, `jest`, `rust`, `mollusk`) are not used for new Anchor programs in this skill.
+- `--package-manager npm` - `anchor init`'s default is `yarn`, which this skill bans. Pin npm at init time so you don't have to fix `Anchor.toml` afterwards.
+- `--test-template litesvm` - currently the default in `anchor-cli`, but pin it explicitly so the project doesn't break if the default changes. The other templates (`mocha`, `jest`, `rust`, `mollusk`) are not used for new Anchor programs in this skill.
 
 The `--template` flag defaults to `multiple` (multi-file program layout with `instructions/`, `state.rs`, `error.rs`); keep that default. `--template single` is a single `lib.rs` and Anchor itself flags it as "not recommended for production".
 
@@ -174,18 +174,18 @@ Before the program binary exists, run `anchor build` so `target/deploy/<name>.so
 
 `anchor init`'s defaults conflict with this skill's rules. Fix them straight away:
 
-1. **Set `package_manager = "npm"` in `Anchor.toml`** — `anchor init` defaults to yarn, but yarn is banned in this skill. If you used `--package-manager npm` at init time you can skip this step.
+1. **Set `package_manager = "npm"` in `Anchor.toml`** - `anchor init` defaults to yarn, but yarn is banned in this skill. If you used `--package-manager npm` at init time you can skip this step.
 
    ```toml
    [toolchain]
    package_manager = "npm"
    ```
 
-2. **Delete `ts-mocha`, `mocha`, `chai` (and their `@types`) from `package.json`** — `--package-manager npm` does not remove the JS test dev-dependencies; you still need this step. The default JS test scaffold is stale. Anchor programs (since 1.0.0) use Rust + LiteSVM instead of TypeScript, not Mocha. If you keep a `package.json` at all (for offchain client code or scripts), it should not pull in Mocha-era dependencies.
+2. **Delete `ts-mocha`, `mocha`, `chai` (and their `@types`) from `package.json`** - `--package-manager npm` does not remove the JS test dev-dependencies; you still need this step. The default JS test scaffold is stale. Anchor programs (since 1.0.0) use Rust + LiteSVM instead of TypeScript, not Mocha. If you keep a `package.json` at all (for offchain client code or scripts), it should not pull in Mocha-era dependencies.
 
 ### Minimal bare-bones test
 
-The `anchor init` scaffold above is already the minimal pattern — `litesvm` plus the `solana-*` primitives, no extra dependencies. Use this when you want zero indirection and complete control over the transaction. New tests can follow the same shape: build an `Instruction`, wrap in a `Message` with the latest blockhash, sign as a `VersionedTransaction`, and call `svm.send_transaction(tx)`.
+The `anchor init` scaffold above is already the minimal pattern - `litesvm` plus the `solana-*` primitives, no extra dependencies. Use this when you want zero indirection and complete control over the transaction. New tests can follow the same shape: build an `Instruction`, wrap in a `Message` with the latest blockhash, sign as a `VersionedTransaction`, and call `svm.send_transaction(tx)`.
 
 ### Optional ergonomic helpers via solana-kite
 
@@ -231,7 +231,7 @@ fn test_initialize() {
 }
 ```
 
-`create_wallet` replaces the `Keypair::new()` + `svm.airdrop(...)` pair, and `send_transaction_from_instructions` replaces the `Message` / `VersionedMessage` / `VersionedTransaction` construction. Its argument order is: the SVM, a `Vec` of instructions, the signers slice, then the fee payer's *pubkey* (not the keypair). Bare `litesvm` is still the baseline — reach for kite when you have repeated boilerplate worth removing.
+`create_wallet` replaces the `Keypair::new()` + `svm.airdrop(...)` pair, and `send_transaction_from_instructions` replaces the `Message` / `VersionedMessage` / `VersionedTransaction` construction. Its argument order is: the SVM, a `Vec` of instructions, the signers slice, then the fee payer's *pubkey* (not the keypair). Bare `litesvm` is still the baseline - reach for kite when you have repeated boilerplate worth removing.
 
 ### Account deserialisation
 
@@ -250,7 +250,7 @@ let counter = CounterAccount::try_from_slice(&account.data[8..]).unwrap();
 assert_eq!(counter.count, 1);
 ```
 
-`8` here is the Anchor account discriminator length, not a magic number — it is fixed by Anchor's account layout. An equivalent alternative is to include the discriminator in the mirror struct (`_discriminator: [u8; 8]` as the first field) and decode the full `account.data` without slicing.
+`8` here is the Anchor account discriminator length, not a magic number - it is fixed by Anchor's account layout. An equivalent alternative is to include the discriminator in the mirror struct (`_discriminator: [u8; 8]` as the first field) and decode the full `account.data` without slicing.
 
 ### Re-expiring blockhash between repeated identical transactions
 
@@ -266,12 +266,12 @@ This is only needed when the message bytes would otherwise be byte-identical. Di
 
 ### Do not use
 
-- `solana-test-validator` — slow, stateful, replaced by LiteSVM for tests.
-- `anchor test --validator legacy` — same reason; the default `anchor test` runs `cargo test` against LiteSVM.
-- `anchor.setProvider`, `anchor.AnchorProvider.env()` — TS Anchor client wiring, no longer used for tests.
-- `program.methods.X().rpc()`, `program.methods.X().sendAndConfirm()` — the TS `@coral-xyz/anchor` client; do not use it for tests.
-- `ts-mocha`, `mocha`, `chai` — the stale `anchor init` JS test scaffold.
-- `tsx`-based `node:test` for Anchor program tests — fine for offchain scripts, not for testing programs.
-- `@solana/web3.js` v1 — legacy in any context.
-- `@coral-xyz/anchor` — Anchor's old TS client; not used in this test pattern.
-- `kit-plugin-litesvm` (the TypeScript LiteSVM plugin) — superseded by using the `litesvm` Rust crate directly.
+- `solana-test-validator` - slow, stateful, replaced by LiteSVM for tests.
+- `anchor test --validator legacy` - same reason; the default `anchor test` runs `cargo test` against LiteSVM.
+- `anchor.setProvider`, `anchor.AnchorProvider.env()` - TS Anchor client wiring, no longer used for tests.
+- `program.methods.X().rpc()`, `program.methods.X().sendAndConfirm()` - the TS `@coral-xyz/anchor` client; do not use it for tests.
+- `ts-mocha`, `mocha`, `chai` - the stale `anchor init` JS test scaffold.
+- `tsx`-based `node:test` for Anchor program tests - fine for offchain scripts, not for testing programs.
+- `@solana/web3.js` v1 - legacy in any context.
+- `@coral-xyz/anchor` - Anchor's old TS client; not used in this test pattern.
+- `kit-plugin-litesvm` (the TypeScript LiteSVM plugin) - superseded by using the `litesvm` Rust crate directly.

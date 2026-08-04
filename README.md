@@ -15,7 +15,7 @@ This plugin has the **most stars of any ecosystem Solana Claude plugin** and is 
 
 ## What is this?
 
-**Solana Finance** is a Claude Code plugin that bundles the `solana` skill — a reusable instruction set Claude automatically applies when working on Solana code, or that you can invoke manually. Skills are triggered automatically based on context (e.g. opening an Anchor program or a Solana Kit client).
+**Solana Finance** is a Claude Code plugin that bundles the `solana` skill - a reusable instruction set Claude automatically applies when working on Solana code, or that you can invoke manually. Skills are triggered automatically based on context (e.g. opening an Anchor program or a Solana Kit client).
 
 ## Installation
 

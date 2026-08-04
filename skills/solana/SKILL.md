@@ -9,13 +9,13 @@ Apply these rules to ensure code quality, maintainability, and adherence to proj
 
 ## Fight for Truth
 
-Don't write things that aren't currently true — anywhere. Chat, code comments, variable names, PR titles, READMEs, commit messages.
+Don't write things that aren't currently true - anywhere. Chat, code comments, variable names, PR titles, READMEs, commit messages.
 
 - Documentation and comments that do not match the code are considered untrue.
 - Variable names that do not match the purpose of the variable are considered untrue. For example, a struct called `InitializeMarket` is not true because a struct cannot 'initialize a market' - structs do not do things, only functions can do things.
 - Temporary workarounds that aren't labelled as such are lying through omission - there is an issue you aren't telling the next programmer about. Mark them with a `TODO` comment with a link to a git issue (if it exists) and telling the next programmer when they can delete the workaround.
 - If unsure of something, say so. Bluffing is lying.
-- **Ambiguity is a soft lie:** if a phrase could be read two ways and only one is true, it's misleading. Disambiguate before sending — pick the term that says exactly what's meant, name the antecedent of every "it"/"this"/"that".
+- **Ambiguity is a soft lie:** if a phrase could be read two ways and only one is true, it's misleading. Disambiguate before sending - pick the term that says exactly what's meant, name the antecedent of every "it"/"this"/"that".
 - A wrong statement is worse than no statement.
 - Separate scratch labels from real identifiers.
 
@@ -23,7 +23,7 @@ Actively fix untrue things when you see them. Don't let "close enough" wording s
 
 **Grep before naming.** Before sending any prose, walkthrough, README, comment, or commit message that names a specific identifier (function, struct, file, account, module, field, constant), grep the source for that exact identifier and confirm it exists. "I'm pretty sure that's the name" is not enough. If the identifier doesn't exist, either use the real name or apply the rename to the code first, then write the prose.
 
-**Describe what is, not what was removed.** READMEs, doc-comments, and code comments document current state — not history. Lines like "no floats", "no longer uses X", "replaces the previous Y approach" belong in CHANGELOGs and PR descriptions, not source artefacts. A first-time reader has no history and "no longer uses I64F64" creates ambient confusion ("wait, should I be worried?"). Sweep before sending: grep for `no longer`, `removed`, `previously`, `used to`, `formerly`, `dropped`, `now uses`, `replaces the previous` — each hit is a candidate for deletion.
+**Describe what is, not what was removed.** READMEs, doc-comments, and code comments document current state - not history. Lines like "no floats", "no longer uses X", "replaces the previous Y approach" belong in CHANGELOGs and PR descriptions, not source artefacts. A first-time reader has no history and "no longer uses I64F64" creates ambient confusion ("wait, should I be worried?"). Sweep before sending: grep for `no longer`, `removed`, `previously`, `used to`, `formerly`, `dropped`, `now uses`, `replaces the previous` - each hit is a candidate for deletion.
 
 ## Do the whole thing
 
@@ -35,7 +35,7 @@ The standard isn't "good enough" - it's "holy shit, that's done." Search before 
 
 Ship the complete thing. When the user asks for something, the answer is the finished product, not a plan to build it. Time is not an excuse. Fatigue is not an excuse. Complexity is not an excuse. Boil the ocean.
 
-**A caveat is not a fix.** When you find a gap while doing the work — missing test coverage, a CI job that doesn't run, an untested path, a stale doc — close it as part of the task. Do not downgrade a fixable defect into a disclaimer. If you catch yourself writing "note: X isn't covered / isn't built / isn't tested / won't get a CI signal," stop: that sentence is a TODO, not a caveat. Fix X so there is nothing to note. Reserve caveats for what you genuinely cannot fix (out of scope, needs a decision, external blocker) — and for those, state what you would do and offer to do it.
+**A caveat is not a fix.** When you find a gap while doing the work - missing test coverage, a CI job that doesn't run, an untested path, a stale doc - close it as part of the task. Do not downgrade a fixable defect into a disclaimer. If you catch yourself writing "note: X isn't covered / isn't built / isn't tested / won't get a CI signal," stop: that sentence is a TODO, not a caveat. Fix X so there is nothing to note. Reserve caveats for what you genuinely cannot fix (out of scope, needs a decision, external blocker) - and for those, state what you would do and offer to do it.
 
 ## Success Criteria
 
@@ -84,7 +84,7 @@ Use these official documentation sources:
   - Use 'Token' rather than 'SPL Token' unless you are specifically discussing the distinction between the native token (SOL) and all other tokens (SPL Tokens)
 
 - Onchain / offchain (one word, no hyphen)
-  - Always write 'onchain' and 'offchain' as single, unhyphenated words — like 'online' and 'offline'.
+  - Always write 'onchain' and 'offchain' as single, unhyphenated words - like 'online' and 'offline'.
   - Never write 'on-chain' or 'off-chain'. The hyphenated forms are wrong.
   - Apply the same rule to related terms: 'crosschain' (not 'cross-chain'), etc.
   - Sources:
@@ -92,7 +92,7 @@ Use these official documentation sources:
     - [US Government usage](https://www.sec.gov/files/rules/interp/2026/33-11412.pdf)
     - [Cat (catmcgee) will make fun of you if you write 'on-chain'](https://x.com/catmcgee/status/2028153588715761825)
 
-- Token amount units: a **major unit** is the human-scale denomination — dollar, pound, yen, SOL. A **minor unit** is the smallest denomination, the raw integer programs operate on — cent, penny, sen, lamport. Use these terms; do not say 'base units'.
+- Token amount units: a **major unit** is the human-scale denomination - dollar, pound, yen, SOL. A **minor unit** is the smallest denomination, the raw integer programs operate on - cent, penny, sen, lamport. Use these terms; do not say 'base units'.
 
 - Some tools in Solana unfortunately use the same word 'instructions' for both the input and the functions. To avoid confusion, use 'instruction handlers' for the functions that handle instructions, and 'instructions' for the input to those functions.
 
@@ -134,11 +134,11 @@ Keep the README focused and practical. Avoid generic boilerplate - write documen
 
 ### Documentation style
 
-- **No numbered headings.** Headings are words only — no `## 1. Overview` or `### 3.6 Liquidation`. Numbered headings break when a section is inserted or removed.
-- **No preview paragraphs.** Don't open a README or section with "the sections below cover X, Y, and Z" — the headings already do that.
+- **No numbered headings.** Headings are words only - no `## 1. Overview` or `### 3.6 Liquidation`. Numbered headings break when a section is inserted or removed.
+- **No preview paragraphs.** Don't open a README or section with "the sections below cover X, Y, and Z" - the headings already do that.
 - **A heading states what the reader gets, and works read alone.** It is close to a summary of its section, because a table of contents lists every heading out of context. Name the outcome, not the mechanism behind it: "Seeds Make Data Findable", not "Seeds Make Addresses Derivable". Keep specific actors out: "A User's Public Key Is Their Address", not "Alice's Public Key Is Her Address". A narrative walkthrough is the exception, where the headings are the story's steps and name who acts.
 - **A section lives where its subject belongs, not where it was first needed.** If a section would sit equally well under a different heading, it is under the wrong one: rent is a property of every account, so it belongs with accounts, even if program-derived vaults are where its lifecycle first mattered. Teach each concept once, in full, where it belongs; elsewhere give it a clause and a pointer, never a second explanation. When a section turns out to be two things, split it and send each half home.
-- **A summary section states what the reader now knows**, not what the example's characters did — "a user's account holds their balance of SOL", not "Alice's holds her balance" — even when the section that taught it was a story.
+- **A summary section states what the reader now knows**, not what the example's characters did - "a user's account holds their balance of SOL", not "Alice's holds her balance" - even when the section that taught it was a story.
 - **Integrate per-instruction reference into lifecycle prose.** Walk through the program's flow and inline each handler's mechanics (signers, accounts, token movements, errors) at the point it's first called. Don't keep a separate flat "Instruction Reference" section.
 - **Emphasis is meaningful.** Bold canonical terms on first use, plain everywhere after, like a textbook, and bold the load-bearing claim of a passage. Italicize the titles of books and other works (*TCP/IP Illustrated*). Never use either as decoration.
 - **Define things by what they concretely are, not by abstract category.** An account is "some data, a Rust struct, with an address", never "the unit of state". A definition that would fit equally well in a document about a different subject is too vague. Prefer the short common word to the impressive one: "the deployed program", not "the deployed bytecode"; "compiled code", not "compiled bytecode". Reach for the precise technical term only where the precision is the point.
@@ -153,19 +153,19 @@ Keep the README focused and practical. Avoid generic boilerplate - write documen
 
 These apply to READMEs, docs, blog posts, and PR descriptions for finance-related projects (AMMs, escrows, lending, leasing, CLOBs, prediction markets, stablecoins).
 
-- **State the mechanism; don't gesture at it.** Say what happens, in the plainest words that stay accurate. Three tells that a sentence is gesturing rather than stating: its subject is a pointer rather than a thing ("this is how it is enforced" — name the thing, "disabling the mint authority is how it is enforced"); a metaphor stands in for the mechanism ("every state needs an exit" makes the reader unpack it, where "every participant must be able to get their money out of every state" is the same length and says it); or it is meta-commentary about the document ("that sentence is the whole design", "this is the real lesson here"). A sentence whose entire content is "this matters" adds nothing the next sentence does not — cut it. Simplify only as far as the meaning survives: "deposited funds are always returned" is simpler than the exit rule and wrong, because a taken escrow offer pays the maker in the *other* token rather than returning what they posted. Where the plainer sentence would change what is true, keep the harder one and make it concrete instead.
-- **"Non-custodial" is a loaded word.** If the program locks funds in vaults during its lifecycle (every escrow, lending, AMM, leasing program does), don't claim "non-custodial" — it contradicts itself. What you usually mean is "no admin override, the rules are the deployed bytecode". Say that directly, or just describe the custody arrangement (program-owned vault, PDA signers, no admin escape hatch).
-- **Upgrade authority is normal on Solana** — programs are usually upgradable so authors can ship security fixes. Don't apologise for it or treat it as disqualifying for "trustless" claims. Trust in the author/multisig is baseline; "trustless" means the documented rules can't be bypassed, not "bytecode frozen forever".
-- **"Token" not "mint" in economic prose, and never the two as synonyms.** A mint is the onchain account that defines a type of token and controls its supply; a token is the asset. A mint is a token's factory, not a token, and holds no balance of anything — which is the test when a sentence is ambiguous: if it can be held, spent, or transferred it is a token, and if it can be created from or checked against it is the mint. So "one mint defines USDC", never "USDC is one mint"; "every distinct token has its own mint account", never "is a distinct mint account". In economic descriptions ("post token A as collateral, borrow token B"), say "token A" and "token B". Reserve "mint account" for technical descriptions of what gets passed to instructions.
-- **Example assets are USDC and real-world assets**: stocks like NVDAx, TSLAx, and SPCXx. Never meme tokens — they date a document and make it read as speculation rather than finance.
-- **Tokens are fungible by default — don't say so.** Don't write "fungible token" or sentences explaining that tokens are fungible. The reader knows. Only qualify when contrasting ("non-fungible token" / NFT). Same rule as not explaining what an integer is.
-- **Don't be fascinated with "tokenization" — a tokenized asset is just an asset.** Drop the word "tokenized" from economic prose. A "basket of tokenized assets" is a "basket of assets"; "tokenized stocks like TSLAx and NVDAx" are "stocks like TSLAx and NVDAx". The fact that an asset is represented by a token onchain is the baseline assumption of everything here, not a notable property. Only mention tokenization when the act of representing an offchain asset onchain is itself the subject (e.g. explaining how an issuer mints a token backed by a real-world asset).
+- **State the mechanism; don't gesture at it.** Say what happens, in the plainest words that stay accurate. Three tells that a sentence is gesturing rather than stating: its subject is a pointer rather than a thing ("this is how it is enforced" - name the thing, "disabling the mint authority is how it is enforced"); a metaphor stands in for the mechanism ("every state needs an exit" makes the reader unpack it, where "every participant must be able to get their money out of every state" is the same length and says it); or it is meta-commentary about the document ("that sentence is the whole design", "this is the real lesson here"). A sentence whose entire content is "this matters" adds nothing the next sentence does not - cut it. Simplify only as far as the meaning survives: "deposited funds are always returned" is simpler than the exit rule and wrong, because a taken escrow offer pays the maker in the *other* token rather than returning what they posted. Where the plainer sentence would change what is true, keep the harder one and make it concrete instead.
+- **"Non-custodial" is a loaded word.** If the program locks funds in vaults during its lifecycle (every escrow, lending, AMM, leasing program does), don't claim "non-custodial" - it contradicts itself. What you usually mean is "no admin override, the rules are the deployed bytecode". Say that directly, or just describe the custody arrangement (program-owned vault, PDA signers, no admin escape hatch).
+- **Upgrade authority is normal on Solana** - programs are usually upgradable so authors can ship security fixes. Don't apologise for it or treat it as disqualifying for "trustless" claims. Trust in the author/multisig is baseline; "trustless" means the documented rules can't be bypassed, not "bytecode frozen forever".
+- **"Token" not "mint" in economic prose, and never the two as synonyms.** A mint is the onchain account that defines a type of token and controls its supply; a token is the asset. A mint is a token's factory, not a token, and holds no balance of anything - which is the test when a sentence is ambiguous: if it can be held, spent, or transferred it is a token, and if it can be created from or checked against it is the mint. So "one mint defines USDC", never "USDC is one mint"; "every distinct token has its own mint account", never "is a distinct mint account". In economic descriptions ("post token A as collateral, borrow token B"), say "token A" and "token B". Reserve "mint account" for technical descriptions of what gets passed to instructions.
+- **Example assets are USDC and real-world assets**: stocks like NVDAx, TSLAx, and SPCXx. Never meme tokens - they date a document and make it read as speculation rather than finance.
+- **Tokens are fungible by default - don't say so.** Don't write "fungible token" or sentences explaining that tokens are fungible. The reader knows. Only qualify when contrasting ("non-fungible token" / NFT). Same rule as not explaining what an integer is.
+- **Don't be fascinated with "tokenization" - a tokenized asset is just an asset.** Drop the word "tokenized" from economic prose. A "basket of tokenized assets" is a "basket of assets"; "tokenized stocks like TSLAx and NVDAx" are "stocks like TSLAx and NVDAx". The fact that an asset is represented by a token onchain is the baseline assumption of everything here, not a notable property. Only mention tokenization when the act of representing an offchain asset onchain is itself the subject (e.g. explaining how an issuer mints a token backed by a real-world asset).
 - **One name per role/concept, enforced everywhere.** Pick a single term for each party (lessor/lessee, maker/taker, long/short, borrower/lender) and use ONLY that term throughout. Mixing terminology mid-document is how readers lose track of who owes what to whom.
 - **Don't conflate "long the collateral" with "long the trade".** Anyone who posts collateral wants it to hold value (otherwise margin call), so every borrower is long their collateral. The directional bet is on the _borrowed_ asset, separately. Be precise about which "long" you mean.
-- **Be careful with the word "securities".** It's a legal term. SOL is not a security. Asset-leasing is not "securities lending" even when the mechanics are analogous. Prefer "asset lending", "token lending", or "directional token lending" — and ask before picking one.
+- **Be careful with the word "securities".** It's a legal term. SOL is not a security. Asset-leasing is not "securities lending" even when the mechanics are analogous. Prefer "asset lending", "token lending", or "directional token lending" - and ask before picking one.
 - **Spell out two-asset flows with concrete examples.** "Posts collateral and takes delivery of borrowed tokens" reads circular. "Posts USDC as collateral, borrows NVDAx" makes the asymmetry obvious. Don't make the reader infer that mints A and B are different things.
 - **Name the instruction handlers in lifecycle prose.** When walking through "what the user does" (open position, close position, liquidate), name the actual handler (`take_lease`, `return_lease`, `liquidate`). Plain-English mechanics without handler names leave the reader unable to connect the narrative to the code.
-- **When you explain or summarize a program** — a README, walkthrough, video script, or answer — follow [SUMMARIZING-PROGRAMS.md](SUMMARIZING-PROGRAMS.md): persona-driven casts, real assets, correct incentives, and step-by-step account state-transition + token-movement ledgers.
+- **When you explain or summarize a program** - a README, walkthrough, video script, or answer - follow [SUMMARIZING-PROGRAMS.md](SUMMARIZING-PROGRAMS.md): persona-driven casts, real assets, correct incentives, and step-by-step account state-transition + token-movement ledgers.
 
 ## General Coding Guidelines
 
@@ -275,9 +275,9 @@ const FINALIZE_EVENT_DISCRIMINATOR = getEventDiscriminator(
 The rules above apply to every file in the project. In addition, read the file that matches the language you are editing:
 
 - **TypeScript** (Solana Kit clients, Solana Kit tests, browser code, anything `.ts`): see [TYPESCRIPT.md](TYPESCRIPT.md)
-- **Rust — any Solana program/crate** (financial math, checked arithmetic, project structure, cargo hygiene): see [RUST.md](RUST.md)
-- **Rust — Anchor** (`.rs` files using `anchor_lang`, LiteSVM tests): see [ANCHOR.md](ANCHOR.md), plus RUST.md for the shared rules
-- **Rust — Quasar** (`.rs` files using `quasar_lang`/`quasar_spl`/`quasar_test`): see [QUASAR.md](QUASAR.md), plus RUST.md for the shared rules
+- **Rust - any Solana program/crate** (financial math, checked arithmetic, project structure, cargo hygiene): see [RUST.md](RUST.md)
+- **Rust - Anchor** (`.rs` files using `anchor_lang`, LiteSVM tests): see [ANCHOR.md](ANCHOR.md), plus RUST.md for the shared rules
+- **Rust - Quasar** (`.rs` files using `quasar_lang`/`quasar_spl`/`quasar_test`): see [QUASAR.md](QUASAR.md), plus RUST.md for the shared rules
 
 If a task touches more than one, read each.
 
