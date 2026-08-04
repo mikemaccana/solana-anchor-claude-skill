@@ -58,7 +58,7 @@ Always rebuild the `.so` after changing program code, before re-running tests: t
 
 ## Quasar CLI
 
-The 0.1.0 line still installs from git (crates.io hosts `0.0.0` placeholders for `quasar-cli`). Pin the exact rev your project's dependencies pin — as of the 0.1.0 launch that is the `0.1.0-release` branch head:
+The 0.1.0 line still installs from git (crates.io hosts `0.0.0` placeholders for `quasar-cli`). Pin the exact rev your project's dependencies pin - as of the 0.1.0 launch that is the `0.1.0-release` branch head:
 
 ```bash
 cargo install --git https://github.com/blueshift-gg/quasar --rev be60fca quasar-cli --locked

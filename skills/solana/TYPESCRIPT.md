@@ -67,7 +67,7 @@ const instructions = [
 ];
 ```
 
-- Set the compute unit limit to a value measured from simulation — don't guess. Over-budgeting wastes fee payer SOL; under-budgeting causes `ComputationalBudgetExceeded`.
+- Set the compute unit limit to a value measured from simulation - don't guess. Over-budgeting wastes fee payer SOL; under-budgeting causes `ComputationalBudgetExceeded`.
 - Set the priority fee (`microLamports`) based on current network conditions. For production code, fetch the recent prioritization fees via `getRecentPrioritizationFees` and use a percentile of recent fees for the accounts your transaction touches.
 - Both instructions must come **before** your program instructions in the array.
 
@@ -92,7 +92,7 @@ try {
 }
 ```
 
-- Always check `error.context.logs` first — the Anchor error message and code are in the logs, not the top-level error object.
+- Always check `error.context.logs` first - the Anchor error message and code are in the logs, not the top-level error object.
 - Anchor error codes are documented at `https://raw.githubusercontent.com/coral-xyz/anchor/master/lang/src/error.rs` (linked in SKILL.md Documentation Sources).
 - For Kite-based code, `connection.sendTransactionFromInstructions` surfaces the same logs on failure via the thrown error.
 
