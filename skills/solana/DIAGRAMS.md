@@ -46,16 +46,16 @@ Each account box carries a small monochrome glyph beside its title, so the kind 
 
 | Account kind | Icon |
 | --- | --- |
-| Person (wallet) | `octicon:person-24` |
+| Person (wallet) | `octicon:person-16` |
 | Token account / vault | `hugeicons:piggy-bank` |
 | Token mint | `boxicons:bank` |
 | Data-struct PDA | `tabler:table` |
 | Program | `streamline-flex:cog` |
 
-- **Person (wallet)** - `octicon:person-24`:
+- **Person (wallet)** - `octicon:person-16`:
 
   ```svg
-  <g transform="translate(X,Y)"><g transform="translate(-1.835,-1.841) scale(0.736)" fill="#111"><path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047a9.005 9.005 0 0 1 5.9 8.181a.75.75 0 1 1-1.499.044a7.5 7.5 0 0 0-14.993 0a.75.75 0 0 1-1.5-.045a9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5M8 8a4 4 0 1 0 8 0a4 4 0 0 0-8 0"/></g></g>
+  <g transform="translate(X,Y)"><g transform="translate(-1.607,-1.079) scale(1.076)" fill="#111"><path d="M10.561 8.073a6 6 0 0 1 3.432 5.142a.75.75 0 1 1-1.498.07a4.5 4.5 0 0 0-8.99 0a.75.75 0 0 1-1.498-.07a6 6 0 0 1 3.431-5.142a3.999 3.999 0 1 1 5.123 0M10.5 5a2.5 2.5 0 1 0-5 0a2.5 2.5 0 0 0 5 0"/></g></g>
   ```
 
 - **Token account / vault** - `hugeicons:piggy-bank`:
