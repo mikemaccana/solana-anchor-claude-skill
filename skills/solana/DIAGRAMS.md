@@ -46,22 +46,22 @@ Each account box carries a small monochrome glyph beside its title, so the kind 
 
 | Account kind | Icon |
 | --- | --- |
-| Person (wallet) | `line-md:person` |
-| Token account / vault | `clarity:piggy-bank-line` |
+| Person (wallet) | `octicon:person-24` |
+| Token account / vault | `lucide:vault` |
 | Token mint | `boxicons:bank` |
 | Data-struct PDA | `tabler:table` |
 | Program | `streamline-flex:cog` |
 
-- **Person (wallet)** - `line-md:person`:
+- **Person (wallet)** - `octicon:person-24`:
 
   ```svg
-  <g transform="translate(X,Y)"><g transform="translate(-3.886,-3.886) scale(0.907)" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.433"><path d="M12 5c1.66 0 3 1.34 3 3c0 1.66 -1.34 3 -3 3c-1.66 0 -3 -1.34 -3 -3c0 -1.66 1.34 -3 3 -3Z"/><path d="M12 14c4 0 7 2 7 3v2h-14v-2c0 -1 3 -3 7 -3Z"/></g></g>
+  <g transform="translate(X,Y)"><g transform="translate(-1.835,-1.841) scale(0.736)" fill="#111"><path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047a9.005 9.005 0 0 1 5.9 8.181a.75.75 0 1 1-1.499.044a7.5 7.5 0 0 0-14.993 0a.75.75 0 0 1-1.5-.045a9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5M8 8a4 4 0 1 0 8 0a4 4 0 0 0-8 0"/></g></g>
   ```
 
-- **Token account / vault** - `clarity:piggy-bank-line`. The outline is drawn as fills far finer than the rest of the line art at this size, so it carries a matching `stroke` to bring it up to the shared weight:
+- **Token account / vault** - `lucide:vault`. The icon's door is a `<rect rx="2">` upstream, written out here as the same rounded rectangle in path form so that a `rect` with any radius other than the account's `rx="6"` stays a linting error:
 
   ```svg
-  <g transform="translate(X,Y)"><g transform="translate(0.072,-0.329) scale(0.384)" fill="#111" stroke="#111" stroke-linejoin="round" stroke-width="1.2"><path d="M19.72 10.47a11.65 11.65 0 0 0-6.31.52a.8.8 0 1 0 .59 1.49a10.1 10.1 0 0 1 5.44-.48a.8.8 0 1 0 .28-1.57Z"/><circle cx="25.38" cy="16.71" r="1.36"/><path d="M35.51 18.63a1 1 0 0 0-.84-.44a3.42 3.42 0 0 1-2.09-1.12a17.4 17.4 0 0 1-2.63-3.78l2.88-4.5A1.89 1.89 0 0 0 33 7a1.77 1.77 0 0 0-1.33-1a10.1 10.1 0 0 0-5.39.75a12.7 12.7 0 0 0-2.72 1.63a17 17 0 0 0-5.16-1.39C11.31 6.3 4.83 10.9 4 17a2.56 2.56 0 0 1-1.38-1.53a1.8 1.8 0 0 1 .14-1.4a1.2 1.2 0 0 1 .43-.43a1.08 1.08 0 0 0-1.12-1.85A3.3 3.3 0 0 0 .91 13a4 4 0 0 0-.33 3.08A4.76 4.76 0 0 0 3 18.95l.92.46a17.6 17.6 0 0 0 1.82 7l.17.38a23 23 0 0 0 3.29 5.09a1 1 0 0 0 .75.34h4.52a1 1 0 0 0 .92-1.38l-.39-.9l1.18.13a20.3 20.3 0 0 0 4 0c.37.6.77 1.2 1.21 1.79a1 1 0 0 0 .8.41h4.34a1 1 0 0 0 .92-1.39c-.17-.4-.34-.83-.47-1.2c-.18-.53-.32-1-.43-1.45A13.2 13.2 0 0 0 29.56 26a12.5 12.5 0 0 0 3 0a1 1 0 0 0 .78-.62l2.26-5.81a1 1 0 0 0-.09-.94m-3.78 5.44a11.4 11.4 0 0 1-2.35-.11a8.2 8.2 0 0 1-2.53-.87a1 1 0 0 0-.93 1.77a12 12 0 0 0 1.29.58a8 8 0 0 1-1.8 1.16l-1.06.48s.49 2.19.82 3.16h-2.38c-.24-.34-1.45-2.36-1.45-2.36l-.67.09a18.5 18.5 0 0 1-4.25.12c-.66-.06-1.76-.2-2.62-.35l-1.55-.27s.63 2.43.75 2.74h-2.58A20.6 20.6 0 0 1 7.76 26l-.18-.39A14.6 14.6 0 0 1 6 17.48c.54-5.19 6.12-9.11 12.19-8.54a15.5 15.5 0 0 1 5.08 1.48l.62.29l.5-.47A10.3 10.3 0 0 1 27 8.54a8.25 8.25 0 0 1 4-.65l-3.38 5.29l.25.5a21.2 21.2 0 0 0 3.31 4.84a6.5 6.5 0 0 0 2.14 1.39Z"/></g></g>
+  <g transform="translate(X,Y)"><g transform="translate(-1.467,-1.467) scale(0.706)" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.843"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><circle cx="7.5" cy="7.5" r=".5" fill="#111"/><path d="m7.9 7.9l2.7 2.7"/><circle cx="16.5" cy="7.5" r=".5" fill="#111"/><path d="m13.4 10.6l2.7-2.7"/><circle cx="7.5" cy="16.5" r=".5" fill="#111"/><path d="m7.9 16.1l2.7-2.7"/><circle cx="16.5" cy="16.5" r=".5" fill="#111"/><path d="m13.4 13.4l2.7 2.7"/><circle cx="12" cy="12" r="2"/></g></g>
   ```
 
 - **Token mint** - `boxicons:bank`:
@@ -82,7 +82,7 @@ Each account box carries a small monochrome glyph beside its title, so the kind 
   <g transform="translate(X,Y)"><g transform="translate(-0.113,-0.112) scale(1.016)" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.28"><path d="M11.808 7.727c0 .05.017.1.048.14l.667.84a.96.96 0 0 1 .082 1.08l-.392.676a.96.96 0 0 1-.975.47l-1.063-.16a.23.23 0 0 0-.145.027l-1.26.727a.23.23 0 0 0-.096.112l-.392 1a.96.96 0 0 1-.893.611h-.782a.96.96 0 0 1-.893-.61l-.392-1a.23.23 0 0 0-.096-.113L3.967 10.8a.23.23 0 0 0-.145-.028l-1.063.162a.96.96 0 0 1-.976-.47l-.39-.677a.96.96 0 0 1 .08-1.08l.67-.84a.22.22 0 0 0 .05-.14V6.273c0-.05-.018-.1-.05-.14l-.67-.84a.96.96 0 0 1-.08-1.08l.39-.676a.96.96 0 0 1 .976-.47l1.06.16a.23.23 0 0 0 .145-.027l1.262-.73a.23.23 0 0 0 .096-.113l.394-.996A.96.96 0 0 1 6.61.75h.784a.96.96 0 0 1 .893.61l.392.997q.028.075.096.116l1.26.727a.23.23 0 0 0 .145.028l1.062-.162a.96.96 0 0 1 .976.47l.391.677a.96.96 0 0 1-.081 1.08l-.67.84a.22.22 0 0 0-.049.14v1.454Z"/><path d="M7 8.996c1.277 0 1.996-.719 1.996-1.996S8.277 5.004 7 5.004S5.004 5.723 5.004 7S5.723 8.996 7 8.996"/></g></g>
   ```
 
-Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure variants. Four of the sets are MIT; Streamline's Flex free icons are CC BY 4.0, so a document that ships these marks credits the sets it uses.
+Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure variants. Four of the sets are MIT or ISC; Streamline's Flex free icons are CC BY 4.0, so a document that ships these marks credits the sets it uses.
 
 ## Token movement arrows carry coins
 
