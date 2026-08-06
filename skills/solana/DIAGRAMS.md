@@ -9,6 +9,7 @@
 - **A program is an account.** Draw it as a rounded rect, and list its instruction handlers inside, left-aligned, one per line. When a figure walks through one instruction, mark that handler's line active (bold + accent).
 - **A custom PDA's rectangle shows its struct as `key: value`, one field per line**, using the walkthrough's story values ("maker: Alice", "amount: 300"), not placeholder types. **Every key must be a field that actually appears in the struct definition, named verbatim** (the code's snake_case, e.g. `total_pool`, not a paraphrase) - never invent keys and never dress prose up as a field. Explanatory notes that aren't fields are italic annotation lines, visually distinct from the field list.
 - **Every account box has the same anatomy: icon, title, rule, fields.** The icon and the title are centred on each other (for a title baseline `b`, the 14-unit glyph wrapper sits at `translate(x, b − 11)`), and a hairline runs beneath them across the box's inner width (`stroke="#888" stroke-width="0.8"`, ~5px under the title baseline), separating the heading from the fields so accounts are easy to tell apart at a glance. A box reduced to icon + title has nothing to separate and takes no rule.
+- **A box reduced to its heading centres that heading vertically.** With no fields beneath it, a heading left at the box's top hangs off the ceiling with a band of dead space under it. Centre the icon/title pair on the box's middle instead: for a box at `y` of height `h`, the glyph wrapper sits at `translate(x, y + h/2 − 7)` and the title baseline follows it at `y + h/2 + 4`. The box keeps its own top position in the column - it is the *contents* that move, not the box.
 - **Bold a value the step changes.** In a step figure, any value that this step changes is drawn bold - a PDA's `key: value` line and a token account's balance alike - so a reader sees what moved without re-reading the prose. Bold is ink weight only; the accent color stays reserved for the step's action.
 - **Text stays inside its box, with padding.** Nothing inside an account rect may touch or cross the border: keep at least 6px of clear space between any text and every edge of the rect. If a line won't fit at the standard size, **reduce the font for the `key: value` (or handler) lines in that box** - 9.5 → 8.5 → 8, monospace 8.5 → 8 → 7.5 - rather than letting text overflow or clip. Verify by rendering.
 - **People are wallet rectangles.** A person draws as a bordered rectangle with a head-and-shoulders glyph, a bold left-aligned name title (a role label like "Alice (maker)" where the figure has roles, plain "Alice's Account" otherwise), and their SOL balance beneath. Arrows carrying lamports or tokens to or from a person start and end at this rectangle's edge, never at a bare address dot and never at a stick figure.
@@ -29,7 +30,7 @@
 
 ## Fade what the step doesn't touch, down to its heading
 
-- **Per-step figures show the program's whole account picture**, but accounts the step doesn't touch are wrapped in `<g opacity="0.3">` AND reduced to icon + title only - no struct fields, no balances. A shorter box, same top position, same address dot and seeds caption (faded). The detail lives in the figures where the account is actually doing something.
+- **Per-step figures show the program's whole account picture**, but accounts the step doesn't touch are wrapped in `<g opacity="0.3">` AND reduced to icon + title only - no struct fields, no balances. A shorter box, same top position, same address dot and seeds caption (faded), and the surviving heading centred in the box per the anatomy rule above. The detail lives in the figures where the account is actually doing something.
 - **Accounts that do not exist yet at that point in the story are omitted**, not faded.
 - **The fade level is `0.3`, and it is the only opacity value allowed.**
 
@@ -41,70 +42,47 @@
 
 ## Icons name the account kind
 
-Each account box carries a small monochrome glyph beside its title, so the kind is scannable without reading:
+Each account box carries a small monochrome glyph beside its title, so the kind is scannable without reading. The five marks come from [Iconify](https://icon-sets.iconify.design/), wrapped so each fills the book's 14-unit glyph box at the shared line weight. **Paste them verbatim** - the inner `transform` is what fits and centres the mark, and retracing one by hand puts it back out of step with the rest.
 
-- **Person (wallet)** - generic head and shoulders:
+| Account kind | Icon |
+| --- | --- |
+| Person (wallet) | `line-md:person` |
+| Token account / vault | `clarity:piggy-bank-line` |
+| Token mint | `boxicons:bank` |
+| Data-struct PDA | `tabler:table` |
+| Program | `streamline-flex:cog` |
 
-  ```svg
-  <g transform="translate(X,Y)">
-    <circle cx="7" cy="4" r="3.1" fill="none" stroke="#111" stroke-width="1.3"/>
-    <path d="M 1.5,13 Q 1.5,8.4 7,8.4 Q 12.5,8.4 12.5,13" fill="none" stroke="#111" stroke-width="1.3"/>
-  </g>
-  ```
-
-- **Token account / vault** - piggy bank. The curly tail trails behind the body on the left; the snout is opaque (`fill="#fff"`, drawn after the body so the body's outline never shows through it) and carries two nostrils. Keep this element order - it is what makes the snout cover the body edge:
-
-  ```svg
-  <g transform="translate(X,Y)">
-    <path d="M 2.6,7.8 Q 0.6,7.4 0.9,5.6 Q 1.1,4.4 2.3,4.9" fill="none" stroke="#111" stroke-width="1"/>
-    <ellipse cx="8" cy="7" rx="5.4" ry="4.4" fill="none" stroke="#111" stroke-width="1.2"/>
-    <ellipse cx="12.9" cy="6.4" rx="1.8" ry="1.5" fill="#fff" stroke="#111" stroke-width="1"/>
-    <circle cx="12.35" cy="6.4" r="0.35" fill="#111"/>
-    <circle cx="13.45" cy="6.4" r="0.35" fill="#111"/>
-    <line x1="5.2" y1="11.4" x2="5.2" y2="13" stroke="#111" stroke-width="1.2"/>
-    <line x1="10.6" y1="11.4" x2="10.6" y2="13" stroke="#111" stroke-width="1.2"/>
-    <line x1="6.8" y1="4.4" x2="9.2" y2="4.4" stroke="#111" stroke-width="1"/>
-  </g>
-  ```
-
-- **Program** - gear:
+- **Person (wallet)** - `line-md:person`:
 
   ```svg
-  <g transform="translate(X,Y)">
-    <circle cx="7" cy="7" r="3.4" fill="none" stroke="#111" stroke-width="1.3"/>
-    <circle cx="7" cy="7" r="1.2" fill="none" stroke="#111" stroke-width="1"/>
-    <g stroke="#111" stroke-width="1.3">
-      <line x1="7" y1="1" x2="7" y2="3"/><line x1="7" y1="11" x2="7" y2="13"/>
-      <line x1="1" y1="7" x2="3" y2="7"/><line x1="11" y1="7" x2="13" y2="7"/>
-      <line x1="2.8" y1="2.8" x2="4.2" y2="4.2"/><line x1="9.8" y1="9.8" x2="11.2" y2="11.2"/>
-      <line x1="11.2" y1="2.8" x2="9.8" y2="4.2"/><line x1="2.8" y1="11.2" x2="4.2" y2="9.8"/>
-    </g>
-  </g>
+  <g transform="translate(X,Y)"><g transform="translate(-3.886,-3.886) scale(0.907)" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.433"><path d="M12 5c1.66 0 3 1.34 3 3c0 1.66 -1.34 3 -3 3c-1.66 0 -3 -1.34 -3 -3c0 -1.66 1.34 -3 3 -3Z"/><path d="M12 14c4 0 7 2 7 3v2h-14v-2c0 -1 3 -3 7 -3Z"/></g></g>
   ```
 
-- **Data-struct PDA** - table:
+- **Token account / vault** - `clarity:piggy-bank-line`. The outline is drawn as fills far finer than the rest of the line art at this size, so it carries a matching `stroke` to bring it up to the shared weight:
 
   ```svg
-  <g transform="translate(X,Y)" stroke="#111" stroke-width="1.2" fill="none">
-    <rect x="1" y="2" width="12" height="10"/>
-    <line x1="1" y1="5.4" x2="13" y2="5.4"/>
-    <line x1="5.5" y1="5.4" x2="5.5" y2="12"/>
-  </g>
+  <g transform="translate(X,Y)"><g transform="translate(0.072,-0.329) scale(0.384)" fill="#111" stroke="#111" stroke-linejoin="round" stroke-width="1.2"><path d="M19.72 10.47a11.65 11.65 0 0 0-6.31.52a.8.8 0 1 0 .59 1.49a10.1 10.1 0 0 1 5.44-.48a.8.8 0 1 0 .28-1.57Z"/><circle cx="25.38" cy="16.71" r="1.36"/><path d="M35.51 18.63a1 1 0 0 0-.84-.44a3.42 3.42 0 0 1-2.09-1.12a17.4 17.4 0 0 1-2.63-3.78l2.88-4.5A1.89 1.89 0 0 0 33 7a1.77 1.77 0 0 0-1.33-1a10.1 10.1 0 0 0-5.39.75a12.7 12.7 0 0 0-2.72 1.63a17 17 0 0 0-5.16-1.39C11.31 6.3 4.83 10.9 4 17a2.56 2.56 0 0 1-1.38-1.53a1.8 1.8 0 0 1 .14-1.4a1.2 1.2 0 0 1 .43-.43a1.08 1.08 0 0 0-1.12-1.85A3.3 3.3 0 0 0 .91 13a4 4 0 0 0-.33 3.08A4.76 4.76 0 0 0 3 18.95l.92.46a17.6 17.6 0 0 0 1.82 7l.17.38a23 23 0 0 0 3.29 5.09a1 1 0 0 0 .75.34h4.52a1 1 0 0 0 .92-1.38l-.39-.9l1.18.13a20.3 20.3 0 0 0 4 0c.37.6.77 1.2 1.21 1.79a1 1 0 0 0 .8.41h4.34a1 1 0 0 0 .92-1.39c-.17-.4-.34-.83-.47-1.2c-.18-.53-.32-1-.43-1.45A13.2 13.2 0 0 0 29.56 26a12.5 12.5 0 0 0 3 0a1 1 0 0 0 .78-.62l2.26-5.81a1 1 0 0 0-.09-.94m-3.78 5.44a11.4 11.4 0 0 1-2.35-.11a8.2 8.2 0 0 1-2.53-.87a1 1 0 0 0-.93 1.77a12 12 0 0 0 1.29.58a8 8 0 0 1-1.8 1.16l-1.06.48s.49 2.19.82 3.16h-2.38c-.24-.34-1.45-2.36-1.45-2.36l-.67.09a18.5 18.5 0 0 1-4.25.12c-.66-.06-1.76-.2-2.62-.35l-1.55-.27s.63 2.43.75 2.74h-2.58A20.6 20.6 0 0 1 7.76 26l-.18-.39A14.6 14.6 0 0 1 6 17.48c.54-5.19 6.12-9.11 12.19-8.54a15.5 15.5 0 0 1 5.08 1.48l.62.29l.5-.47A10.3 10.3 0 0 1 27 8.54a8.25 8.25 0 0 1 4-.65l-3.38 5.29l.25.5a21.2 21.2 0 0 0 3.31 4.84a6.5 6.5 0 0 0 2.14 1.39Z"/></g></g>
   ```
 
-- **Mint** - a mint building, pediment over columns:
+- **Token mint** - `boxicons:bank`:
 
   ```svg
-  <g transform="translate(X,Y)" stroke="#111" stroke-width="1.2" fill="none">
-    <path d="M 1,5 L 7,1 L 13,5 Z"/>
-    <line x1="3" y1="6.5" x2="3" y2="11"/>
-    <line x1="7" y1="6.5" x2="7" y2="11"/>
-    <line x1="11" y1="6.5" x2="11" y2="11"/>
-    <line x1="1.5" y1="12.5" x2="12.5" y2="12.5"/>
-  </g>
+  <g transform="translate(X,Y)"><g transform="translate(-1.4,-1.401) scale(0.7)" fill="#111"><path d="m21.49 7.13l-9-5a.99.99 0 0 0-.97 0l-9.01 5C2.19 7.31 2 7.64 2 8v3c0 .55.45 1 1 1h2v4H3c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h18c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1h-2v-4h2c.55 0 1-.45 1-1V8a1 1 0 0 0-.51-.87M7 12h2v4H7zm6 0v4h-2v-4zm7 6v2H4v-2zm-3-2h-2v-4h2zm3-6H4V8.59l8-4.44l8 4.44z"/><path d="M12 6a1.5 1.5 0 1 0 0 3a1.5 1.5 0 1 0 0-3"/></g></g>
   ```
 
-Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure variants.
+- **Data-struct PDA** - `tabler:table`:
+
+  ```svg
+  <g transform="translate(X,Y)"><g transform="translate(-1.467,-1.467) scale(0.706)" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.843"><path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm0 5h18M10 3v18"/></g></g>
+  ```
+
+- **Program** - `streamline-flex:cog`:
+
+  ```svg
+  <g transform="translate(X,Y)"><g transform="translate(-0.113,-0.112) scale(1.016)" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.28"><path d="M11.808 7.727c0 .05.017.1.048.14l.667.84a.96.96 0 0 1 .082 1.08l-.392.676a.96.96 0 0 1-.975.47l-1.063-.16a.23.23 0 0 0-.145.027l-1.26.727a.23.23 0 0 0-.096.112l-.392 1a.96.96 0 0 1-.893.611h-.782a.96.96 0 0 1-.893-.61l-.392-1a.23.23 0 0 0-.096-.113L3.967 10.8a.23.23 0 0 0-.145-.028l-1.063.162a.96.96 0 0 1-.976-.47l-.39-.677a.96.96 0 0 1 .08-1.08l.67-.84a.22.22 0 0 0 .05-.14V6.273c0-.05-.018-.1-.05-.14l-.67-.84a.96.96 0 0 1-.08-1.08l.39-.676a.96.96 0 0 1 .976-.47l1.06.16a.23.23 0 0 0 .145-.027l1.262-.73a.23.23 0 0 0 .096-.113l.394-.996A.96.96 0 0 1 6.61.75h.784a.96.96 0 0 1 .893.61l.392.997q.028.075.096.116l1.26.727a.23.23 0 0 0 .145.028l1.062-.162a.96.96 0 0 1 .976.47l.391.677a.96.96 0 0 1-.081 1.08l-.67.84a.22.22 0 0 0-.049.14v1.454Z"/><path d="M7 8.996c1.277 0 1.996-.719 1.996-1.996S8.277 5.004 7 5.004S5.004 5.723 5.004 7S5.723 8.996 7 8.996"/></g></g>
+  ```
+
+Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure variants. Four of the sets are MIT; Streamline's Flex free icons are CC BY 4.0, so a document that ships these marks credits the sets it uses.
 
 ## Token movement arrows carry coins
 
@@ -141,3 +119,4 @@ Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure v
 - `opacity` values other than the fade value `0.3`.
 - Mermaid, Graphviz, or generated diagrams for account figures - the layout decisions (stable columns, fade grouping) are the content, and generators cannot make them.
 - Filled address dots, bare dots with no account rectangle, seeds inside account rects, coins on non-token arrows, or bare handler names without `()`.
+- Hand-drawn substitutes for the five account glyphs, or a heading left at the top of a box that carries nothing else.
