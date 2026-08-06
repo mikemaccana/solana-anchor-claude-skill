@@ -47,7 +47,7 @@ Each account box carries a small monochrome glyph beside its title, so the kind 
 | Account kind | Icon |
 | --- | --- |
 | Person (wallet) | `octicon:person-24` |
-| Token account / vault | `lucide:vault` |
+| Token account / vault | `hugeicons:piggy-bank` |
 | Token mint | `boxicons:bank` |
 | Data-struct PDA | `tabler:table` |
 | Program | `streamline-flex:cog` |
@@ -58,10 +58,10 @@ Each account box carries a small monochrome glyph beside its title, so the kind 
   <g transform="translate(X,Y)"><g transform="translate(-1.835,-1.841) scale(0.736)" fill="#111"><path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047a9.005 9.005 0 0 1 5.9 8.181a.75.75 0 1 1-1.499.044a7.5 7.5 0 0 0-14.993 0a.75.75 0 0 1-1.5-.045a9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5M8 8a4 4 0 1 0 8 0a4 4 0 0 0-8 0"/></g></g>
   ```
 
-- **Token account / vault** - `lucide:vault`. The icon's door is a `<rect rx="2">` upstream, written out here as the same rounded rectangle in path form so that a `rect` with any radius other than the account's `rx="6"` stays a linting error:
+- **Token account / vault** - `hugeicons:piggy-bank`:
 
   ```svg
-  <g transform="translate(X,Y)"><g transform="translate(-1.467,-1.467) scale(0.706)" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.843"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><circle cx="7.5" cy="7.5" r=".5" fill="#111"/><path d="m7.9 7.9l2.7 2.7"/><circle cx="16.5" cy="7.5" r=".5" fill="#111"/><path d="m13.4 10.6l2.7-2.7"/><circle cx="7.5" cy="16.5" r=".5" fill="#111"/><path d="m7.9 16.1l2.7-2.7"/><circle cx="16.5" cy="16.5" r=".5" fill="#111"/><path d="m13.4 13.4l2.7 2.7"/><circle cx="12" cy="12" r="2"/></g></g>
+  <g transform="translate(X,Y)"><g transform="translate(-0.62,-0.62) scale(0.635)" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.047"><path d="M14.5 5.5h-4A6.5 6.5 0 0 0 7 17.478l.288 1.738c.07.423.105.635.202.798a1 1 0 0 0 .49.416c.178.07.392.07.822.07c.397 0 .596 0 .764-.062a1 1 0 0 0 .479-.374c.1-.148.15-.34.246-.727l.209-.837h3l.21.837c.096.386.144.58.245.727a1 1 0 0 0 .479.374c.168.062.367.062.764.062c.43 0 .644 0 .821-.07a1 1 0 0 0 .49-.416c.098-.163.133-.375.203-.798L17 17.478a6.5 6.5 0 0 0 2.502-2.978l.89-.178c.77-.154 1.155-.231 1.381-.508c.227-.276.227-.669.227-1.453v-.3c0-.75 0-1.124-.212-1.396c-.212-.27-.575-.362-1.303-.544L20 10c0-1.5-1.167-2.833-2-3.5v-3h-.264c-1.37 0-2.623.774-3.236 2"/><path d="M15.875 9.75h-.125m.25 0a.25.25 0 1 1-.5 0a.25.25 0 0 1 .5 0M2 8v2a2 2 0 0 0 2 2"/></g></g>
   ```
 
 - **Token mint** - `boxicons:bank`:
@@ -82,7 +82,7 @@ Each account box carries a small monochrome glyph beside its title, so the kind 
   <g transform="translate(X,Y)"><g transform="translate(-0.113,-0.112) scale(1.016)" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.28"><path d="M11.808 7.727c0 .05.017.1.048.14l.667.84a.96.96 0 0 1 .082 1.08l-.392.676a.96.96 0 0 1-.975.47l-1.063-.16a.23.23 0 0 0-.145.027l-1.26.727a.23.23 0 0 0-.096.112l-.392 1a.96.96 0 0 1-.893.611h-.782a.96.96 0 0 1-.893-.61l-.392-1a.23.23 0 0 0-.096-.113L3.967 10.8a.23.23 0 0 0-.145-.028l-1.063.162a.96.96 0 0 1-.976-.47l-.39-.677a.96.96 0 0 1 .08-1.08l.67-.84a.22.22 0 0 0 .05-.14V6.273c0-.05-.018-.1-.05-.14l-.67-.84a.96.96 0 0 1-.08-1.08l.39-.676a.96.96 0 0 1 .976-.47l1.06.16a.23.23 0 0 0 .145-.027l1.262-.73a.23.23 0 0 0 .096-.113l.394-.996A.96.96 0 0 1 6.61.75h.784a.96.96 0 0 1 .893.61l.392.997q.028.075.096.116l1.26.727a.23.23 0 0 0 .145.028l1.062-.162a.96.96 0 0 1 .976.47l.391.677a.96.96 0 0 1-.081 1.08l-.67.84a.22.22 0 0 0-.049.14v1.454Z"/><path d="M7 8.996c1.277 0 1.996-.719 1.996-1.996S8.277 5.004 7 5.004S5.004 5.723 5.004 7S5.723 8.996 7 8.996"/></g></g>
   ```
 
-Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure variants. Four of the sets are MIT or ISC; Streamline's Flex free icons are CC BY 4.0, so a document that ships these marks credits the sets it uses.
+Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure variants. Four of the sets are MIT; Streamline's Flex free icons are CC BY 4.0, so a document that ships these marks credits the sets it uses.
 
 ## Token movement arrows carry coins
 
