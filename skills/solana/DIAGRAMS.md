@@ -113,6 +113,18 @@ Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure v
 - **A narration of the steps does not earn it.** Numbered step labels already carry the sequence and the prose already carries the reasoning, so an annotation that walks through what the arrows show is a third telling of the same thing. If a figure needs several paragraphs to be understood, the figure is doing too much: split it, or let the chapter carry the argument.
 - **Disclosure notes are not explanatory annotation** and do not count against the one block. The omitted-accounts note stays, and stays to one line.
 
+## Numbered step labels
+
+- **One style for every numbered step: accent green `#1e7a3c`, bold, 10.5.** The numbers are how a reader picks the sequence out of a dense figure, so they must not also have to decode size and colour to know what is a step. This overrides the palette rule below for step labels specifically: a step that closes an account or refunds rent is still a step and still takes the accent, even though the *arrow* carrying those lamports stays dashed grey.
+- **A numbered label never begins with a digit.** `3. 50 USDC to Dave` reads as 3.50 at print size, and `1. 0.12 NVDAx out` worse. Lead with the verb or the actor and let the amount follow - `3. Dave takes 50 USDC`. The amount is still stated, so the coin rule is satisfied, and the label reads as a step rather than a quantity.
+- **Number only what the words do not already order.** "1. first buy / 2. second buy" says it twice; drop the numerals and keep the words.
+
+## A label beside a coin is anchored away from it
+
+- **Pin the edge the coin is on.** A coin sits at a fixed `translate()`, but text grows as the face gets wider, and the book's figures are rendered wherever Georgia may or may not be installed. An `end`- or `middle`-anchored label with a coin on its left creeps leftward until the coin's 4.5px white halo - drawn after the label - paints over the first characters. Anchor such a label at its **start** so it grows away from the coin instead; where the coin sits on the right, anchor at the **end**.
+- **Convert a multi-line amount block as a unit.** Consecutive accent lines only read as one amount when they share an anchor and their anchored edges align. Re-anchoring one line of a two-line block splits it, and the coin is then beside a label that no longer states an amount.
+- **Measuring this needs the transform.** `getBBox()` on a coin group returns pre-transform local coordinates (roughly −9.5…9.5), so the group's `translate()` has to be added back. A check that skips this reports zero overlaps everywhere and passes a figure whose coin is sitting on the text.
+
 ## Addresses are white-centered dots
 
 - **Every address dot has a white center**, on-curve and off-curve alike: `<circle r="6" fill="#fff" stroke="#111" stroke-width="2"/>`. Do not fill address dots with ink.
