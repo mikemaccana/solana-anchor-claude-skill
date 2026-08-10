@@ -116,6 +116,13 @@ Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure v
 - **Seeds are never drawn inside the account's rectangle.** Seeds are inputs to the address, not fields of the struct. They live beside the address dot, above or beside the account box.
 - **Every dot has an account rectangle.** A dot drawn on its own says the address exists but holds no account, which is never what a figure means. Draw the account too, rounded, with its icon and title, so a figure never implies that public keys have accounts and PDAs do not. The one exception is a legend key, where a lone dot beside its explanatory line is the whole point.
 
+## Some accounts may be named instead of drawn
+
+- **An account may be named instead of drawn when the figure says nothing about it.** The test is a property of the account, not of how crowded the page is: every reference to it in that figure is a seed component or a field naming it, the figure states none of its own fields, and no arrow starts or ends on it. Mint accounts on an account map usually qualify - a box holding a title and no fields is the least informative object on the page, and the seed lists already name things they do not draw, `TOKEN PROGRAM` among them.
+- **An account the figure has something to say about is never omittable.** If the figure states one of its fields, if an arrow starts or ends on it, or if the prose calls it out by role, it is drawn. A mint that is minted to or burned from is touched by an arrow and stays, which is why a share mint stays in every figure of the fund that issues it.
+- **A figure that omits an account says so, and names it.** One italic annotation in the same register as the figure's other notes, listing each omitted account and why they were safe to omit - "not drawn: the TSLAx, NVDAx and USDC mints - every account that names them does so as a seed." A silent omission reads as an account model with a hole in it.
+- **This is a permission, not an obligation.** A figure with room may draw every account, and existing figures are not wrong for doing so. Nothing here is mechanically checked: which references are "only a seed" is a judgement the linter cannot make.
+
 ## Do not use
 
 - A second hue, or the accent on anything except the step's action.
