@@ -106,6 +106,13 @@ Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure v
 - **A callout never restates account state.** If a step changes `admin_fees_owed_b`, show it as that field's new value inside its PDA box - bold, per the rule above - not as a separate box saying `admin_fees_owed_b += $0.05`. The account is the single source of truth for its own state; a floating callout duplicates it and will drift.
 - **Coins mean token value moved, in this step.** Lamport and rent flows, "owns", and "is authority for" relationships stay dashed grey (`stroke="#777" stroke-dasharray="5 3"`) with no coins and no accent. A coin never appears on a faded element or on a movement the figure is not illustrating: the mark is accent green, and accent green means the step's action. A reader scanning for value transfer follows the green.
 
+## One annotation, and only for what cannot be drawn
+
+- **A figure carries one block of explanatory annotation, three lines at most.** The chapter is the single source of truth for the argument. An annotation that restates a paragraph the reader is about to read duplicates it and will drift, exactly as a callout that restates account state does - the same failure, one level up. If a note and the prose disagree after an edit, the reader has no way to tell which one is stale.
+- **Spend the block on something the drawing cannot say for itself.** An absence is the clearest case: no arrangement of boxes shows that a handler moving vault tokens to the manager does not exist, or that no price account is passed to a handler. A constraint on what *cannot* happen, a justification for why a faded element is on the page at all, the reason a value is what it is - these earn the space.
+- **A narration of the steps does not earn it.** Numbered step labels already carry the sequence and the prose already carries the reasoning, so an annotation that walks through what the arrows show is a third telling of the same thing. If a figure needs several paragraphs to be understood, the figure is doing too much: split it, or let the chapter carry the argument.
+- **Disclosure notes are not explanatory annotation** and do not count against the one block. The omitted-accounts note stays, and stays to one line.
+
 ## Addresses are white-centered dots
 
 - **Every address dot has a white center**, on-curve and off-curve alike: `<circle r="6" fill="#fff" stroke="#111" stroke-width="2"/>`. Do not fill address dots with ink.
