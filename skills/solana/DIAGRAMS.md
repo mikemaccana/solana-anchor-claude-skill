@@ -113,7 +113,24 @@ Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure v
 - **A figure carries one block of explanatory annotation, three lines at most.** The chapter is the single source of truth for the argument. An annotation that restates a paragraph the reader is about to read duplicates it and will drift, exactly as a callout that restates account state does - the same failure, one level up. If a note and the prose disagree after an edit, the reader has no way to tell which one is stale.
 - **Spend the block on something the drawing cannot say for itself.** An absence is the clearest case: no arrangement of boxes shows that a handler moving vault tokens to the manager does not exist, or that no price account is passed to a handler. A constraint on what *cannot* happen, a justification for why a faded element is on the page at all, the reason a value is what it is - these earn the space.
 - **A narration of the steps does not earn it.** Numbered step labels already carry the sequence and the prose already carries the reasoning, so an annotation that walks through what the arrows show is a third telling of the same thing. If a figure needs several paragraphs to be understood, the figure is doing too much: split it, or let the chapter carry the argument.
-- **Disclosure notes are not explanatory annotation** and do not count against the one block. The omitted-accounts note stays, and stays to one line.
+- **Disclosure notes are not explanatory annotation** and do not count against the one block. The omitted-accounts note stays, and stays to one line, at `font-size="7.5"` italic: at 9 it reads at the same weight as a struct field and the eye takes it for one.
+- **Nothing goes after `</svg>`.** A footnote added below the closing tag is not in the drawing at all: the browser lays it out as loose text after the figure, in body type, so it breaks to the next page on its own and prints above the caption. This happened to all five vault figures.
+
+## Steps live in a key box, not on the arrows
+
+- **Three or more value movements: put the words in a key box and leave a numbered marker on each arrow.** Labels sit where the geometry puts them, not where the sequence does. On the vault rebalance figure the four legs read 2, 3, 4, 1 down the canvas, so a reader met the second step first. A key box is the one place the steps can appear in the order they happen, and it gives the canvas its width back. Two movements or fewer stay on the canvas: a two-row key box costs about 90 units to move two short labels, and with two arrows nobody gets lost.
+- **The order comes from the handler, not from the drawing.** `quicknode/solana-program-examples` is the authority on sequence in the same way it is on names. `deposit.rs` computes NAV, takes the USDC in, loops the assets swapping each weight-sized slice, and mints last - so the vault deposit figure numbers minting sixth, not fourth as it did when the order was read off the picture.
+- **Where the code has no order, do not invent one.** Three bettors staking are three separate transactions; two alternative futures are not steps. Those figures keep their labels on the canvas rather than claiming a sequence the program does not have.
+- **A step reads as a consequence, not a fact.** "24 USDC in" does not say where the USDC came from or why it arrived. "Receive 24 USDC in return" does, and the round trip becomes visible when the entries are read together.
+- **The marker is a solid rounded square with a white numeral, never a disc.** A numbered circle and a coin mark are both circles, and they print at about 10pt and 2mm respectively - close enough that a reader has to look twice to tell a step from a value.
+- **The coin stays on the line.** A coin marks where value moves, and nothing moves inside a legend. It sits beside the marker on the arrow; the key box holds words and numbers only.
+- **A key box is not an account box.** Give it `class="key"` so the geometry check does not read its rows as text inside a box, and keep it free of the `rx="6"` account radius.
+
+## A figure's height follows from its aspect ratio
+
+- **Keep `viewBox` height within 1.22 times its width.** A figure is reproduced at the text width, so height is fixed by the ratio: past about 1.22 it cannot fit the text block once the caption is counted. Paged.js then breaks the page inside the figure, and one over-tall figure spread itself across a dozen pages, nine of them blank. Roughly 75 of this book's 252 pages were that failure.
+- **Shrinking to fit is not available.** At the text width the scale is 0.646pt per unit, so a 7-unit seed label already prints at 4.52pt and 59% of all figure text is under 6pt. A figure that does not fit has to carry less or rearrange, never scale down.
+- **Look for the dead band before cutting content.** The vault flow figures ran an eight-box column down the right side while the middle was empty for 360 units. Moving three boxes into that space took 913 units to 716 and lost nothing.
 
 ## Numbered step labels
 
@@ -136,6 +153,11 @@ Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure v
 - **A built-in address hangs off the curve and carries its address, not seeds.** The System Program, the token programs, and the sysvars are neither public keys somebody holds the key for nor PDAs derived from seeds: the byte string was chosen and the runtime treats it as the thing it names. Draw the dot off the curve, because placement encodes whether a signature can ever move what the address holds, and label it with the address itself, truncated (`SysvarC1ock111...`), in the monospace face at the seed list's size. No derivation arrow: nothing derives it, and the missing arrow is what distinguishes it from a PDA at a glance. Whether the bytes happen to decode to a point on the curve is an accident and never a reason to draw the dot on it.
 - **Seeds are never drawn inside the account's rectangle.** Seeds are inputs to the address, not fields of the struct. They live beside the address dot, above or beside the account box.
 - **Every dot has an account rectangle.** A dot drawn on its own says the address exists but holds no account, which is never what a figure means. Draw the account too, rounded, with its icon and title, so a figure never implies that public keys have accounts and PDAs do not. The one exception is a legend key, where a lone dot beside its explanatory line is the whole point.
+
+## A headline names the figure, the caption says what it cannot
+
+- **Every figure opens with a headline, top-left, bold at 15 units.** It balances the network label opposite and names the moment: "Maria claims her fees", "Carol's ask fills Bob's bid". Without one, the naming falls to the caption, and captions grew into paragraphs that restated the body text around them - a heading and a 283-character caption saying the same thing twice with nothing quick to read in between.
+- **The caption then carries the one thing the drawing cannot.** Not a recital of the accounts in the picture and not a narration of the steps, both of which are already on the canvas. Keep it to a line.
 
 ## Some accounts may be named instead of drawn
 
