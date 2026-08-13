@@ -129,6 +129,7 @@ Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure v
 ## A box holds balances, fields or handlers, and nothing else
 
 - **The only italic that belongs inside an account box names the authority.** "owes 750 USDC", "his own capital", "holds no list", "two contributions of 450", a role like "investor" or "liquidator" - none of these is a thing the account holds. They were 89 lines across 31 figures. `authority:` and `mint authority:` stay, because those are facts about the account rather than remarks about it.
+- **An account's owner is a field, not a remark.** A Pyth price account is owned by the Pyth Receiver program rather than by ours, and that is the reason to draw the feed at all instead of naming it. Write it as `owner: Pyth Receiver` alongside the other fields; every Solana account has an owner, so it is a property of the account and belongs in the box.
 - **Fit the box to what is left.** Removing a line and leaving the box its old height reads as a missing field. Refitting after that pass recovered 906 units across 63 boxes.
 
 ## One figure, one instruction handler
