@@ -126,6 +126,22 @@ Draw the glyphs exactly as specified - one vocabulary book-wide, no per-figure v
 - **The coin stays on the line.** A coin marks where value moves, and nothing moves inside a legend. It sits beside the marker on the arrow; the key box holds words and numbers only.
 - **A key box is not an account box.** Give it `class="key"` so the geometry check does not read its rows as text inside a box, and keep it free of the `rx="6"` account radius.
 
+## A box holds balances, fields or handlers, and nothing else
+
+- **The only italic that belongs inside an account box names the authority.** "owes 750 USDC", "his own capital", "holds no list", "two contributions of 450", a role like "investor" or "liquidator" - none of these is a thing the account holds. They were 89 lines across 31 figures. `authority:` and `mint authority:` stay, because those are facts about the account rather than remarks about it.
+- **Fit the box to what is left.** Removing a line and leaving the box its old height reads as a missing field. Refitting after that pass recovered 906 units across 63 boxes.
+
+## One figure, one instruction handler
+
+- **A figure that spans three handlers is three figures.** `lending-borrow-ltv` numbered four calls in an on-canvas list while its key box numbered three value movements, and carried a bar chart besides. Split to one handler it is 735 units instead of 903, because a figure only needs the accounts its own handler touches: the price feeds and share mints came out, six boxes, and the figure fit.
+- **An account map is the exception, and splits by subject instead.** It is the one figure that has to show every account, so it cannot drop rows. `lending-account-map` became the market and its borrowers, plus `lending-reserves` for the three reserve stacks.
+- **A chart is not an account diagram.** Health bars, headroom bars and before-and-after comparisons go in their own figure. Nothing on the account canvas points at them.
+
+## The mark goes where the value moves
+
+- **The coin sits on the arrow, at its midpoint**, with the numbered marker beside it. A coin means *value moves here*, so it belongs on the line rather than next to it; if the coin then clips a box, walk it along the arrow rather than nudging it off.
+- **The network label sits just above its curve, not at the top of the canvas.** Measure the clearance at the label's left edge, where the curve is highest: the label's halo is drawn after the curve and will erase the heaviest line in the figure if they meet. A figure with two clusters has two labels and one curve cannot place both, so leave those alone.
+
 ## A figure's height follows from its aspect ratio
 
 - **Keep `viewBox` height within 1.22 times its width.** A figure is reproduced at the text width, so height is fixed by the ratio: past about 1.22 it cannot fit the text block once the caption is counted. Paged.js then breaks the page inside the figure, and one over-tall figure spread itself across a dozen pages, nine of them blank. Roughly 75 of this book's 252 pages were that failure.
