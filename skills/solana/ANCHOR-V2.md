@@ -148,9 +148,26 @@ Loading a data account mutably sets pinocchio's exclusive sentinel (`borrow_stat
 
 1. For a Token-2022 extension, use anchor-spl's accessor. `TokenInterfaceAccountExtensions::get_extension::<T>()` on an `InterfaceAccount<Mint>` or `InterfaceAccount<TokenAccount>` parses the TLV through the borrow the wrapper already holds, and checks the account is owned by Token-2022 on the way. It is bounded on `Pod`, so it covers every fixed-size extension but not a variable-length one like `TokenMetadata`.
 2. Drop the `mut` if the account is not written. A mint passed to `transfer_checked_with_fee` is read-only, because the withheld fee accrues on the destination token account.
-3. Read through the exclusive borrow already held: `unsafe { account.account().borrow_unchecked() }`. Sound whenever the instruction holds that borrow for its whole duration and hands out no second one, which is the case for anything reached through `ctx.accounts`. Give it a `SAFETY:` comment saying so. Reach for it only where the first two do not apply.
+3. Declare the field `UncheckedAccount` and load the typed wrapper by hand. `AnchorAccount::load` is safe, runs exactly the validation the derive would have run, and registers a **shared** borrow rather than an exclusive one, so an ordinary `try_borrow()` still has room:
+
+```rust
+/// CHECK: loaded and validated as an `InterfaceAccount<Mint>` below.
+#[account(mut)]
+pub mint_account: UncheckedAccount,
+...
+let mint = InterfaceAccount::<Mint>::load(*ctx.accounts.mint_account.account())?;
+let buffer = mint.account().try_borrow()?;
+```
+
+Keep the `mut`. It is what marks the account writable in the IDL, which the client needs for the CPI that writes to it, and `cpi_handle_mut()` on an `UncheckedAccount` checks the runtime writable flag rather than the wrapper's own mutability. Drop the loaded wrapper before the CPI so its shared borrow is released. This is the route to a variable-length extension such as `TokenMetadata`, which `get_extension` cannot reach.
+
+`unsafe { account.account().borrow_unchecked() }`, reading through the exclusive borrow already held, is what `get_extension` does internally and is sound on anything reached through `ctx.accounts`. It should still be the last resort: one of the three options above has covered every case so far.
 
 A read-only account is different: a second shared borrow is fine, so `account().try_borrow()?` works there.
+
+### Sysvars Beyond Clock and Rent
+
+pinocchio ships typed accessors for Clock and Rent only, so anchor-lang v2 exposes no more than that. For anything else, declare the layout and read it with `pinocchio::sysvars::get_sysvar(&mut buf, &sysvar_id, 0)`. It is a safe wrapper over the `sol_get_sysvar` syscall, and off-chain it is a no-op that leaves the buffer zeroed, so IDL and client builds compile without a `cfg` split of their own. Reaching for `solana-define-syscall` and calling `sol_get_sysvar` directly is the same read with an `unsafe` block and a `MaybeUninit` around it.
 
 ## Constraints That Moved or Disappeared
 
