@@ -144,10 +144,11 @@ Take the writable handle **last**. It borrows the field mutably for the rest of 
 
 ### A mut Data Account Cannot Be Borrowed Again
 
-Loading a data account mutably sets pinocchio's exclusive sentinel (`borrow_state == 0`), so **any** `try_borrow()` on it fails. Two ways out, in order of preference:
+Loading a data account mutably sets pinocchio's exclusive sentinel (`borrow_state == 0`), so **any** `try_borrow()` on it fails. Three ways out, in order of preference:
 
-1. Drop the `mut` if the account is not written. A mint passed to `transfer_checked_with_fee` is read-only, because the withheld fee accrues on the destination token account.
-2. Read through the exclusive borrow already held: `unsafe { account.account().borrow_unchecked() }`. Sound whenever the instruction holds that borrow for its whole duration and hands out no second one, which is the case for anything reached through `ctx.accounts`. Give it a `SAFETY:` comment saying so.
+1. For a Token-2022 extension, use anchor-spl's accessor. `TokenInterfaceAccountExtensions::get_extension::<T>()` on an `InterfaceAccount<Mint>` or `InterfaceAccount<TokenAccount>` parses the TLV through the borrow the wrapper already holds, and checks the account is owned by Token-2022 on the way. It is bounded on `Pod`, so it covers every fixed-size extension but not a variable-length one like `TokenMetadata`.
+2. Drop the `mut` if the account is not written. A mint passed to `transfer_checked_with_fee` is read-only, because the withheld fee accrues on the destination token account.
+3. Read through the exclusive borrow already held: `unsafe { account.account().borrow_unchecked() }`. Sound whenever the instruction holds that borrow for its whole duration and hands out no second one, which is the case for anything reached through `ctx.accounts`. Give it a `SAFETY:` comment saying so. Reach for it only where the first two do not apply.
 
 A read-only account is different: a second shared borrow is fine, so `account().try_borrow()?` works there.
 
@@ -196,7 +197,11 @@ Where that pattern is the point of the program, build the account by hand with `
 
 v2 rejects an account that appears in more than one declared slot while any of those slots is mutable, with `ConstraintDuplicateMutableAccount` (custom error 2040). Minting or sending to yourself hits this, because the authority and the recipient are the same account.
 
+The rule exists because v1 deserialized each `Account<T>` into an owned copy and wrote it back at the end of the instruction. Two slots over one account meant two independent copies, and the second write-back silently clobbered the first. That is the classic self-transfer bug: debit one copy, credit the other, write both, and the balance goes up. v2 accounts are zero-copy views into the runtime's buffer, so two mutable wrappers over one account would be two `&mut` to the same bytes. The loader rejects rather than warns.
+
 `#[account(unsafe(dup))]` opts a slot out. It implies `mut`, so it replaces the `mut` rather than joining it. The walker flags **both** indices of a duplicate, so marking only the second one leaves the first intersecting the mutable mask: every slot that can legitimately alias needs the constraint, including a `payer`.
+
+The `unsafe` is real, so check two things before reaching for it. First, that the accounts can actually alias: if no caller ever passes the same address twice, the constraint weakens a live safety check for nothing, and the fix is to leave it off. Second, that the aliasing slots are wrappers holding no deserialized state, such as `Signer`, `SystemAccount` or `UncheckedAccount`. There is no lost-update hazard there because there is nothing to write back. Two aliasing `Account<T>` slots are the case the check is for, and the fix is to restructure the accounts so only one of them exists.
 
 ## Discriminators, and Programs That Implement an Interface
 
