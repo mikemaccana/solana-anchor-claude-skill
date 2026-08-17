@@ -7,6 +7,7 @@ Anchor-specific rules. Read these alongside the general rules in [SKILL.md](SKIL
 - Write all code like the latest stable Anchor (currently 1.0.2 but there may be a newer version by the time you read this)
 - Use LiteSVM and Rust tests for new Anchor programs. `anchor init` uses LiteSVM by default.
 - Do not use unnecessary macros that are not needed in the latest stable Anchor
+- Anchor 2.0.0-rc.1 is a release candidate and a ground-up rewrite: `no_std`, built on pinocchio, zero-copy accounts, wincode instead of borsh, and typed CPI handles. Porting to it, or writing it: see [ANCHOR-V2.md](ANCHOR-V2.md). The rest of this file is Anchor 1.x.
 
 ### Anchor 1.0 specifics
 

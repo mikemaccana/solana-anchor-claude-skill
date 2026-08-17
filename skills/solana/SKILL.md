@@ -286,6 +286,7 @@ The rules above apply to every file in the project. In addition, read the file t
 - **TypeScript** (Solana Kit clients, Solana Kit tests, browser code, anything `.ts`): see [TYPESCRIPT.md](TYPESCRIPT.md)
 - **Rust - any Solana program/crate** (financial math, checked arithmetic, project structure, cargo hygiene): see [RUST.md](RUST.md)
 - **Rust - Anchor** (`.rs` files using `anchor_lang`, LiteSVM tests): see [ANCHOR.md](ANCHOR.md), plus RUST.md for the shared rules
+- **Rust - Anchor 2.0.0-rc.1** (porting a 1.x program, or writing v2): see [ANCHOR-V2.md](ANCHOR-V2.md), plus ANCHOR.md and RUST.md
 - **Rust - Quasar** (`.rs` files using `quasar_lang`/`quasar_spl`/`quasar_test`): see [QUASAR.md](QUASAR.md), plus RUST.md for the shared rules
 
 If a task touches more than one, read each.
