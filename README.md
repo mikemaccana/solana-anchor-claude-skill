@@ -54,6 +54,7 @@ Once installed, the skill automatically applies when Claude Code works on Solana
 skills/solana/               # The skill
   SKILL.md                   # Skill entry point + general guidelines
   ANCHOR.md  RUST.md  QUASAR.md  TYPESCRIPT.md   # Language/framework references
+  ANCHOR-V2.md               # Porting a program to Anchor 2.0.0-rc.1
   ENVIRONMENT.md             # Toolchain setup for CI and remote containers
   SUMMARIZING-PROGRAMS.md    # How to explain and summarize programs
   DIAGRAMS.md                # Account diagram (SVG figure) conventions
