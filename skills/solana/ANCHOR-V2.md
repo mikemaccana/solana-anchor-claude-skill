@@ -270,6 +270,16 @@ args.serialize(&mut data)
 
 pinocchio ships `Clock` and `Rent`. Anything else, `LastRestartSlot` for instance, has to be declared locally and read through the `sol_get_sysvar` syscall with `solana-define-syscall`. `solana-sysvar`'s own `get` is bound to that crate's `Sysvar` trait, not pinocchio's, so it is not usable from a v2 program.
 
+## What 2.0.0-rc.1 Cannot Do Yet, and What to Undo When It Can
+
+Three things below are worked around rather than fixed, because the fix is not in a published release. Undo them together when Anchor publishes anything after `2.0.0-rc.1`, and check each one rather than assuming the release covered it.
+
+- **`#[derive(IdlType)]` on an enum produces an IDL that Anchor itself cannot read.** `anchor-derive-accounts` writes the JSON key `fields` for every type kind, while `anchor-lang-idl-spec` requires `variants` for `IdlTypeDefTy::Enum`, so `anchor build` fails on its own output with ``Error: missing field `variants` ``. Any program with an enum in its IDL hits it; nothing in the program is wrong. The fix is on `anchor-next` (PR 4947) and unreleased. Until then the only workaround is `anchor build --no-idl`, which also has to go on `anchor test`, because that regenerates the IDL too. A project that consumes its IDL, through `declare_program!` or a committed `idls/*.json`, cannot use this workaround at all.
+- **The LiteSVM test harness is not on crates.io.** `anchor-v2-testing`, which `anchor test --profile`, `anchor debugger` and `anchor coverage` all require, exists only as a git dependency on `anchor-next`. Pin a revision rather than tracking the branch, or a build can change behaviour with no commit to explain it. Tests calling `LiteSVM::new()` directly still pass but record no traces, so those three tools silently produce nothing.
+- **A type reaching the IDL without a v2 derive fails only during IDL generation.** `` `T` has no IDL type information `` means a plain struct needs `#[derive(IdlType)]`; account and event types get it from `#[account]` / `#[event]`. Leftover `impl anchor_lang::IdlBuild for T {}` from 1.x is worse, because `IdlBuild` no longer exists and the impl usually sits behind `#[cfg(feature = "idl-build")]`, where `cargo check`, `cargo clippy` and `cargo fmt` never compile it. Only `anchor build` does.
+
+That last point generalises: **anything behind the `idl-build` feature is invisible to every check except `anchor build`.** A repository whose CI builds only changed projects can carry such a break for months.
+
 ## Two Ambiguities That Bite
 
 - `seeds` takes a byte array directly and binds it itself. Write `id.to_le_bytes()`, not `id.to_le_bytes().as_ref()`, which produces a temporary that dies before the derive uses it.
