@@ -78,6 +78,8 @@ Use these official documentation sources:
   - There are no 'mempools'.
   - Do not tell me about other things that are not relevant to Solana.
 
+- Avoid 'protocol' entirely. The word gets used for the chain itself and for the programs running on it, so a reader cannot tell which one a sentence means. Say **network** for Solana and the rules it enforces - the slot time, consensus, finality, what the runtime guarantees - and **program** for onchain code. 'The network shortened the slot'; 'a lending program', not 'a lending protocol'. Identifiers that ship with the word (`accumulated_protocol_fees`) keep it: rename the prose, never the code.
+
 - Token program terminology:
   - Use 'Token Extensions Program' or 'Token extensions' for the newer token program (not 'Token 2022' which is just a code name)
   - Use 'Classic Token Program' for the older token program
