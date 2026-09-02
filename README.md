@@ -36,7 +36,7 @@ You can also install just the skill directly:
 npx skills add https://github.com/quicknode/solana-finance-claude-plugin
 ```
 
-This installs the skill to your Claude Code skills directory (`~/.claude/skills/`).
+This installs the skill into the current project's `.claude/skills/` directory. Add `-g` to install it for every project, under `~/.claude/skills/`, and `--agent claude-code` if the CLI detects other agents you do not want it installed for.
 
 ## Usage
 
