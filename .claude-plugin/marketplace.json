@@ -1,0 +1,14 @@
+{
+  "name": "quicknode",
+  "owner": {
+    "name": "Quicknode",
+    "url": "https://www.quicknode.com"
+  },
+  "plugins": [
+    {
+      "name": "solana-finance",
+      "source": "./",
+      "description": "Solana finance rules for Claude Code: Anchor, Quasar, Rust and TypeScript, with onchain math, custody, oracle freshness and slippage checks."
+    }
+  ]
+}

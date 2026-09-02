@@ -21,10 +21,11 @@ This plugin has the **most stars of any ecosystem Solana Claude plugin** and is 
 
 ### As a plugin (recommended)
 
-Once the plugin is published, install it from the marketplace:
+Add this repository as a marketplace, then install the plugin from it:
 
 ```
-/plugin install solana-finance
+/plugin marketplace add quicknode/solana-finance-claude-plugin
+/plugin install solana-finance@quicknode
 ```
 
 ### As a standalone skill
@@ -32,7 +33,7 @@ Once the plugin is published, install it from the marketplace:
 You can also install just the skill directly:
 
 ```bash
-npx skills add https://github.com/quicknode/solana-finance-skill
+npx skills add https://github.com/quicknode/solana-finance-claude-plugin
 ```
 
 This installs the skill to your Claude Code skills directory (`~/.claude/skills/`).
@@ -51,6 +52,7 @@ Once installed, the skill automatically applies when Claude Code works on Solana
 
 ```
 .claude-plugin/plugin.json   # Plugin manifest (name, author, version)
+.claude-plugin/marketplace.json  # Marketplace manifest, so /plugin marketplace add accepts this repo
 skills/solana/               # The skill
   SKILL.md                   # Skill entry point + general guidelines
   ANCHOR.md  RUST.md  QUASAR.md  TYPESCRIPT.md   # Language/framework references

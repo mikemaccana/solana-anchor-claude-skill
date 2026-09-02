@@ -8,8 +8,8 @@
     "name": "Quicknode",
     "url": "https://www.quicknode.com"
   },
-  "homepage": "https://github.com/quicknode/solana-claude-skill",
-  "repository": "https://github.com/quicknode/solana-claude-skill",
+  "homepage": "https://github.com/quicknode/solana-finance-claude-plugin",
+  "repository": "https://github.com/quicknode/solana-finance-claude-plugin",
   "license": "MIT",
   "keywords": [
     "solana",
